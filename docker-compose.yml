@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - sql-server
+    environment:
+      - DB_CONNECTION=sqlsrv
+      - DB_HOST=192.168.29.84
+      - DB_PORT=1433
+      - DB_DATABASE=clientprogressonline_dev
+      - DB_USERNAME=sa
+      - DB_PASSWORD=Avdevs@123
+      - DB_ENCRYPT=yes
+      - DB_TRUST_SERVER_CERTIFICATE=true
+    network_mode: host
+  sql-server:
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Avdevs@123
+      - MSSQL_PID=Developer
