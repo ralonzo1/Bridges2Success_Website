@@ -52,8 +52,8 @@ class UploadClientController extends Controller
             // Upload picture file to S3 and store URL in DB
             $uploadedFile = $request->file('pictureFile');
             $name = time() . "." . $uploadedFile->getClientOriginalExtension();
-            $filePath = 'client-profiles/' . $name;
-            Storage::disk('s3')->put($filePath, file_get_contents($uploadedFile));
+            $filePath = 'uploads/client-profiles/' . $name;
+            Storage::disk('public')->put($filePath, file_get_contents($uploadedFile));
             $data['PictureFile'] = $filePath;
         }
 
