@@ -14,8 +14,8 @@ class RegistrationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected string $name = '';
-    protected string $email = '';
+    public string $name = '';
+    public string $email = '';
     /**
      * Create a new message instance.
      */
