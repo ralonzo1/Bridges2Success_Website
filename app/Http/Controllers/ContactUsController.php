@@ -16,7 +16,7 @@ class ContactUsController extends Controller
         $data = $this->generateDataToStore($request);
         ContactUsQueries::create($data);
         Mail::to($data['email'])->send(new ContactUsMail());
-        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new AdminContactUsMail($data['email'], $data['message']));
+        Mail::to(env('ADMIN_EMAIL_ADDRESS', 'office@bridges2success.com'))->send(new AdminContactUsMail($data['email'], $data['message']));
         return response()->json([
             'status' => true,
             "message" => "Data stored successfully"
