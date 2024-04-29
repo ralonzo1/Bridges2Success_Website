@@ -15,14 +15,15 @@ class UploadClientController extends Controller
     {
         $data = $this->generateDataToStore($request);
         UploadClient::create($data);
-        Mail::to($data['Email'])->send(new RegistrationEmail($data['Email'], $data['FirstName']." ".$data['LastName']));
+        Mail::to($data['Email'])->send(new RegistrationEmail($data['Email'], $data['FirstName'] . " " . $data['LastName']));
         return response()->json([
             'status' => true,
             "message" => "Data stored successfully"
         ]);
     }
 
-    private function generateDataToStore(Request $request) {
+    private function generateDataToStore(Request $request)
+    {
         $data = [
             'FirstName' => $request->firstName,
             'LastName' => $request->lastName,
@@ -35,15 +36,15 @@ class UploadClientController extends Controller
             'City' => $request->city,
             'State' => $request->state,
             'Zip' => $request->zipCode,
-            'Phone' => $request->phone,
+            'PhoneHome' => $request->phone,
             'Email' => $request->email,
             'ReferredProgram' => $request->programsReferredTo ?? "",
             'ReferredBy' => $request->referredBy ?? "",
             'IntakePref' => $request->intakePreference,
             'AttendingLocation' => $request->location,
-            'PictureFile'=> '',
-            'chkAgree'=> $request->chkAgree ? 1 : 0,
-            'chkPermission'=> $request->chkPermission ? 1 : 0,
+            'PictureFile' => '',
+            'chkAgree' => $request->chkAgree ? 1 : 0,
+            'chkPermission' => $request->chkPermission ? 1 : 0,
         ];
 
         // Check file present in request
@@ -52,8 +53,8 @@ class UploadClientController extends Controller
             // Upload picture file to S3 and store URL in DB
             $uploadedFile = $request->file('pictureFile');
             $name = time() . "." . $uploadedFile->getClientOriginalExtension();
-            $filePath = 'uploads/client-profiles/' . $name;
-            Storage::disk('public')->put($filePath, file_get_contents($uploadedFile));
+            $filePath = env('CLIENT_PROFILE_PATH') . $name;
+            Storage::disk('uploads')->put($filePath, file_get_contents($uploadedFile));
             $data['PictureFile'] = $filePath;
         }
 
