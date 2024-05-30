@@ -1,0 +1,42 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+nav a{
+    font-family: "Kepler W03 Light SCd Cp";
+     font-size: 18px; 
+}
+main{
+    padding-left: 2rem!important;
+    padding-right: 2rem!important;
+}
+p,li,a{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    color: rgb(6, 33, 52);
+}
+.link{
+    font-size: larger;
+    color: rgb(130, 14, 216);
+}
+.list-circle{
+    list-style-type: circle;    
+}
+.list-square{
+    list-style-type: square;
+}
+
+@media (min-width: 1206px) {
+    .container {
+      max-width: 980px;
+    }
+  }
+@media (max-width: 706px) {
+  main{
+    padding-left: 1rem!important;
+    padding-right: 1rem!important;
+    }
+}
