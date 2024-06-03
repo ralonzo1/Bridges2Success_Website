@@ -67,22 +67,22 @@ export default function Registration() {
         <p className="py-1 pb-6"><b>E-mail:</b> office@bridges2success.com</p>
         <p className="pb-4 font-semibold">Please continue to the registration form and we look forward to working with you!</p>
         <form className="m-auto max-w-[600px]" onSubmit={handleSubmit} encType="multipart/form-data">
-                        <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+                        <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>First Name*</label>                                                 
                     <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Last Name*</label>
                     <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>DOB*</label>
                     <input name="DOB" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Gender*</label>
                     <select name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                         <option value="">Choose an option</option>
@@ -92,8 +92,8 @@ export default function Registration() {
                     
                 </div>
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Relationship to Victim*</label>                    
                     <select name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                         <option value="">Choose an option</option>
@@ -103,7 +103,7 @@ export default function Registration() {
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Preferred Pronouns*</label>
                     <input name="preferredPronouns" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
@@ -120,45 +120,45 @@ export default function Registration() {
                     <input name="streetAddress2" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>City*</label>
                     <input name="city" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>State*</label>
                     <input name="state" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Zip code</label>
                     <input name="zipCode" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
               
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Phone*</label>
                     <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Email*</label>
                     <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Program(s) being referred to*</label>
                     <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Referral Source Name*</label>
                     <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
             </div>
-            <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
+            <div className="flex flex-wrap mb-4">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Intake preference*</label>                    
                     <select name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                         <option value="">Please select</option>
@@ -166,7 +166,7 @@ export default function Registration() {
                         <option value="In Person">In Person</option>
                     </select>
                 </div>
-                <div className="w-1/2 pr-2">
+                <div className="w-full md:w-1/2 pr-2">
                     <label>Location*</label>                    
                     <select name="location" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                         <option value="">Choose an office</option>
