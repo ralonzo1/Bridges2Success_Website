@@ -156,6 +156,8 @@ export default function Registration() {
                     {errors.programsReferredTo && <span className="text-red-500">{errors.programsReferredTo}</span>}
                 </div>
             </div>
+            <input name="streetAddress1" type="hidden" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" value=""/>
+            <input name="streetAddress2" type="hidden" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" value=""/>
             {/* <div className="flex mb-4">
                 <div className="w-full pr-2">
                     <label>Street Address*</label>
