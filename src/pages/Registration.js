@@ -3,26 +3,68 @@ import React, {useState} from "react";
 export default function Registration() {
     const [isAgreeChecked, setIsAgreeChecked] = useState(false);
     const [isPermissionChecked, setIsPermissionChecked] = useState(false);
-    
+
+    const [errors, setErrors] = useState({});
+
     const handleAgreeChange = (event) => {
-      setIsAgreeChecked(event.target.checked);
+        setIsAgreeChecked(event.target.checked);
+    };
+
+    const handlePermissionChange = (event) => {
+        setIsPermissionChecked(event.target.checked);
     };
     
-    const handlePermissionChange = (event) => {
-      setIsPermissionChecked(event.target.checked);
-    };
-    const [showThankYou, setShowThankYou] = useState(false);    
+    const [showThankYou, setShowThankYou] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-
         const formData = new FormData(event.target);
         const agreeValue = isAgreeChecked ? 1 : 0;
         const permissionValue = isPermissionChecked ? 1 : 0;
         formData.set('chkAgree', agreeValue);
         formData.set('chkPermission', permissionValue);
-      
+
+        // Validate fields
+        const newErrors = {};
+        if (!formData.get('firstName')) {
+            newErrors.firstName = 'First Name is required';
+        }
+        if (!formData.get('lastName')) {
+            newErrors.lastName = 'Last Name is required';
+        }
+        if (!formData.get('DOB')) {
+            newErrors.DOB = 'Date of Birth is required';
+        }
+        if (!formData.get('gender')) {
+            newErrors.gender = 'Gender is required';
+        }
+        if (!formData.get('relationshipWithVictim')) {
+            newErrors.relationshipWithVictim = 'Relationship to Victim is required';
+        }
+        if (!formData.get('phone')) {
+            newErrors.phone = 'Phone is required';
+        }
+        if (!formData.get('email')) {
+            newErrors.email = 'Email is required';
+        }
+        if (!formData.get('programsReferredTo')) {
+            newErrors.programsReferredTo = 'Program(s) being referred to is required';
+        }
+        if (!formData.get('referredBy')) {
+            newErrors.referredBy = 'Referral Source Name is required';
+        }
+        if (!formData.get('intakePreference')) {
+            newErrors.intakePreference = 'Intake preference is required';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        setErrors({});
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/upload-client`, {
                 method: 'POST',
@@ -30,9 +72,8 @@ export default function Registration() {
             });
 
             if (response.ok) {
-                alert('Registered  successfully!');
+                alert('Registered successfully!');
                 setShowThankYou(true);
-
             } else {
                 alert('Failed to submit form. Please try again.');
             }
@@ -70,41 +111,49 @@ export default function Registration() {
                         <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>First Name*</label>                                                 
-                    <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="First Name" required/>
+                    <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="First Name" />
+                    {errors.firstName && <span className="text-red-500">{errors.firstName}</span>}
+
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Last Name*</label>
-                    <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Last Name" required/>
+                    <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Last Name" />
+                    {errors.lastName && <span className="text-red-500">{errors.lastName}</span>}
+
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>DOB*</label>
-                    <input name="DOB" type="date" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Date of Birth" required/>
+                    <input name="DOB" type="date" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Date of Birth" />
+                    {errors.DOB && <span className="text-red-500">{errors.DOB}</span>}
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Gender*</label>
-                    <select name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" required>
+                    <select name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" >
                         <option value="">Choose an option</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
+                    {errors.gender && <span className="text-red-500">{errors.gender}</span>}
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Relationship to Victim*</label>                    
-                    <select name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" required>
+                    <select name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" >
                         <option value="">Choose an option</option>
                         <option value="Intimate Partner">Intimate Partner</option>
                         <option value="Family Member">Family Member</option>
                         <option value="Stranger">Stranger</option>
                         <option value="Other">Other</option>
                     </select>
+                    {errors.relationshipWithVictim && <span className="text-red-500">{errors.relationshipWithVictim}</span>}
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Preferred Pronouns</label>
                     <input name="preferredPronouns" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Pronouns"/>
+                    {errors.programsReferredTo && <span className="text-red-500">{errors.programsReferredTo}</span>}
                 </div>
             </div>
             {/* <div className="flex mb-4">
@@ -139,31 +188,39 @@ export default function Registration() {
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Phone*</label>
-                    <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone" required/>
-                </div>
+                    <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone" />
+                    {errors.phone && <span className="text-red-500">{errors.phone}</span>}
+                </div>             
+
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Email*</label>
-                    <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email" required/>
+                    <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email" />
+                    {errors.email && <span className="text-red-500">{errors.email}</span>}
+
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Program(s) being referred to*</label>
-                    <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)" required/>
+                    <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)" />
+                    {errors.programsReferredTo && <span className="text-red-500">{errors.programsReferredTo}</span>}
+
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Referral Source Name*</label>
-                    <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc" required/>
+                    <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc" />
+                    {errors.referredBy && <span className="text-red-500">{errors.referredBy}</span>}
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Intake preference*</label>                    
-                    <select name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" required> 
+                    <select name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" > 
                         <option value="">Please select</option>
                         <option value="Online">Online</option>
                         <option value="In Person">In Person</option>
                     </select>
+                    {errors.intakePreference && <span className="text-red-500">{errors.intakePreference}</span>}
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Location</label>                    
@@ -180,7 +237,7 @@ export default function Registration() {
                         <option value="Hillsboro">Hillsboro</option>
                         <option value="Tillamook">Tillamook</option>    
                     </select>
-                </div>
+            </div>
             </div>
             <p className="italic pb-5">Please note that completing your intake online requires the use of a computer to complete the necessary paperwork, it can not be completed on your phone or tablet.</p>
             <div className="flex mb-4">
@@ -191,16 +248,15 @@ export default function Registration() {
              </div>
              <p className="italic pt-5">Please upload a clear photo of your face. (Please note that your referral source will be able to see this photo) </p>
              <div className="flex mb-4">
-             <div className="flex items-center justify-center w-full">
-                <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-16 border border-black cursor-pointer bg-[#DAEDFF] ">
-                    <div className="flex flex-col items-center justify-center pt-3 ">                            
-                        <p className="mb-2 text-base text-[#373B4D] italic leading-10">Upload Photo <span className="text-2xl font-semibold">+</span>                        
-                        </p>                            
-                    </div>
-                    <input id="dropzone-file" type="file" name="pictureFile" className="hidden" />
-                </label>
-            </div>
-               
+                <div className="flex items-center justify-center w-full">
+                    <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-16 border border-black cursor-pointer bg-[#DAEDFF] ">
+                        <div className="flex flex-col items-center justify-center pt-3 ">                            
+                            <p className="mb-2 text-base text-[#373B4D] italic leading-10">Upload Photo <span className="text-2xl font-semibold">+</span>                        
+                            </p>                            
+                        </div>
+                        <input id="dropzone-file" type="file" name="pictureFile" className="hidden" />
+                    </label>
+                </div>               
             </div>
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkAgree" checked={isAgreeChecked} onChange={handleAgreeChange} className="mr-4"/>I agree to follow through with  the remainder of my intake process when I receive the next steps</p>
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4"/>I give you permission to communicate with my referral source about my case. </p>
