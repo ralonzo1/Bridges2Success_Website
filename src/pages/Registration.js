@@ -121,11 +121,11 @@ export default function Registration() {
             </div> */}
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
-                    <label>City*</label>
+                    <label>City</label>
                     <input name="city" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="City"/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
-                    <label>State*</label>
+                    <label>State</label>
                     <input name="state" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Region/State/Province"/>
                 </div>
             </div>
@@ -139,34 +139,34 @@ export default function Registration() {
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Phone*</label>
-                    <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone"/>
+                    <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone" required/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Email*</label>
-                    <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email"/>
+                    <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email" required/>
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Program(s) being referred to*</label>
-                    <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)"/>
+                    <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)" required/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Referral Source Name*</label>
-                    <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc"/>
+                    <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc" required/>
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Intake preference*</label>                    
-                    <select name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                    <select name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" required> 
                         <option value="">Please select</option>
                         <option value="Online">Online</option>
                         <option value="In Person">In Person</option>
                     </select>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
-                    <label>Location*</label>                    
+                    <label>Location</label>                    
                     <select name="location" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                         <option value="">Choose an office</option>
                         <option value="Salem">Salem</option>
