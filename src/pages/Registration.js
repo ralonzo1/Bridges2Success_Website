@@ -70,32 +70,31 @@ export default function Registration() {
                         <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>First Name*</label>                                                 
-                    <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="First Name" required/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Last Name*</label>
-                    <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Last Name" required/>
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>DOB*</label>
-                    <input name="DOB" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="DOB" type="date" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Date of Birth" required/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Gender*</label>
-                    <select name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                    <select name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" required>
                         <option value="">Choose an option</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
-                    
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Relationship to Victim*</label>                    
-                    <select name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                    <select name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]" required>
                         <option value="">Choose an option</option>
                         <option value="Intimate Partner">Intimate Partner</option>
                         <option value="Family Member">Family Member</option>
@@ -104,11 +103,11 @@ export default function Registration() {
                     </select>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
-                    <label>Preferred Pronouns*</label>
-                    <input name="preferredPronouns" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <label>Preferred Pronouns</label>
+                    <input name="preferredPronouns" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Pronouns"/>
                 </div>
             </div>
-            <div className="flex mb-4">
+            {/* <div className="flex mb-4">
                 <div className="w-full pr-2">
                     <label>Street Address*</label>
                     <input name="streetAddress1" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
@@ -119,42 +118,42 @@ export default function Registration() {
                     <label>Street Address Line 2*</label>
                     <input name="streetAddress2" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>City*</label>
-                    <input name="city" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="city" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="City"/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>State*</label>
-                    <input name="state" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="state" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Region/State/Province"/>
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Zip code</label>
-                    <input name="zipCode" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="zipCode" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Postal / Zip code"/>
                 </div>
               
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Phone*</label>
-                    <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone"/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Email*</label>
-                    <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email"/>
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Program(s) being referred to*</label>
-                    <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)"/>
                 </div>
                 <div className="w-full md:w-1/2 pr-2">
                     <label>Referral Source Name*</label>
-                    <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
+                    <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc"/>
                 </div>
             </div>
             <div className="flex flex-wrap mb-4">
@@ -193,23 +192,24 @@ export default function Registration() {
              <p className="italic pt-5">Please upload a clear photo of your face. (Please note that your referral source will be able to see this photo) </p>
              <div className="flex mb-4">
              <div className="flex items-center justify-center w-full">
-                    <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-16 border border-black cursor-pointer bg-[#DAEDFF] ">
-                        <div className="flex flex-col items-center justify-center pt-3 ">                            
-                            <p className="mb-2 text-base text-[#373B4D] italic leading-10">Upload Photo <span className="text-2xl font-semibold">+</span>
-                            
-                            </p>                            
-                        </div>
-                        <input id="dropzone-file" type="file" name="pictureFile" className="hidden" />
-                    </label>
-                </div>
+                <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-16 border border-black cursor-pointer bg-[#DAEDFF] ">
+                    <div className="flex flex-col items-center justify-center pt-3 ">                            
+                        <p className="mb-2 text-base text-[#373B4D] italic leading-10">Upload Photo <span className="text-2xl font-semibold">+</span>                        
+                        </p>                            
+                    </div>
+                    <input id="dropzone-file" type="file" name="pictureFile" className="hidden" />
+                </label>
+            </div>
                
             </div>
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkAgree" checked={isAgreeChecked} onChange={handleAgreeChange} className="mr-4"/>I agree to follow through with  the remainder of my intake process when I receive the next steps</p>
-      <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4"/>I give you permission to communicate with my referral source about my case. </p>
-       <p className="text-left text-sm italic pl-6">*This authorization is good for 60 days.</p>
-            <div className="text-center my-10"><button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center">Submit</button></div>
+            <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4"/>I give you permission to communicate with my referral source about my case. </p>
+            <p className="text-left text-sm italic pl-6">*This authorization is good for 60 days.</p>
+            <div className="text-center my-10"><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-idlxoy38fk0o" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/enterprise/anchor?ar=1&amp;k=6Ld0J8IcAAAAANyrnxzrRlX1xrrdXsOmsepUYosy&amp;co=aHR0cHM6Ly93d3cuYnJpZGdlczJzdWNjZXNzLmNvbTo0NDM.&amp;hl=en&amp;v=9pvHvq7kSOTqqZusUzJ6ewaF&amp;theme=light&amp;size=normal&amp;cb=y6n5us26awsl"></iframe></div>
+            <div className="text-center my-10"><button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto">Submit</button></div>
+            
         </form>
-        {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Thank you! Please check your mail.</p>}
+        {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Your registration has been submitted! Please check your email for confirmation</p>}
 
     </main> 
         
