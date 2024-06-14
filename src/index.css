@@ -30,7 +30,7 @@ p,li,a{
 }
 input, select{
     height: 36px;
-    padding: 0.2rem;
+    padding: 0.2rem!important;
 }
 
 
