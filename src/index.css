@@ -28,6 +28,11 @@ p,li,a{
 .list-square{
     list-style-type: square;
 }
+input, select{
+    height: 36px;
+    padding: 0.2rem;
+}
+
 
 @media (min-width: 1206px) {
     .container {
