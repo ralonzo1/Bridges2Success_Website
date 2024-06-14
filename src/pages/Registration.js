@@ -260,8 +260,8 @@ export default function Registration() {
                     </label>
                 </div>               
             </div>
-            <p className="text-left italic pt-5"> <input type="checkbox" name="chkAgree" checked={isAgreeChecked} onChange={handleAgreeChange} className="mr-4"/>I agree to follow through with  the remainder of my intake process when I receive the next steps</p>
-            <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4"/>I give you permission to communicate with my referral source about my case. </p>
+            <p className="text-left italic pt-5"> <input type="checkbox" name="chkAgree" checked={isAgreeChecked} onChange={handleAgreeChange} className="mr-4 h-auto"/>I agree to follow through with  the remainder of my intake process when I receive the next steps</p>
+            <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4 h-auto"/>I give you permission to communicate with my referral source about my case. </p>
             <p className="text-left text-sm italic pl-6">*This authorization is good for 60 days.</p>
             <div className="text-center my-10"><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-idlxoy38fk0o" className=" m-auto" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/enterprise/anchor?ar=1&amp;k=6Ld0J8IcAAAAANyrnxzrRlX1xrrdXsOmsepUYosy&amp;co=aHR0cHM6Ly93d3cuYnJpZGdlczJzdWNjZXNzLmNvbTo0NDM.&amp;hl=en&amp;v=9pvHvq7kSOTqqZusUzJ6ewaF&amp;theme=light&amp;size=normal&amp;cb=y6n5us26awsl"></iframe></div>
             <div className="text-center my-10"><button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto">Submit</button></div>
