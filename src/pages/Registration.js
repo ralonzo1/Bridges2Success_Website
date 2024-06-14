@@ -158,18 +158,18 @@ export default function Registration() {
             </div>
             <input name="streetAddress1" type="hidden" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" value=""/>
             <input name="streetAddress2" type="hidden" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" value=""/>
-            {/* <div className="flex mb-4">
+             <div className="flex mb-4">
                 <div className="w-full pr-2">
-                    <label>Street Address*</label>
+                    <label>Street Address</label>
                     <input name="streetAddress1" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
              </div>
              <div className="flex mb-4">
                 <div className="w-full pr-2">
-                    <label>Street Address Line 2*</label>
+                    <label>Street Address Line 2</label>
                     <input name="streetAddress2" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"/>
                 </div>
-            </div> */}
+            </div> 
             <div className="flex flex-wrap mb-4">
                 <div className="w-full md:w-1/2 pr-2">
                     <label>City</label>
@@ -263,7 +263,7 @@ export default function Registration() {
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkAgree" checked={isAgreeChecked} onChange={handleAgreeChange} className="mr-4"/>I agree to follow through with  the remainder of my intake process when I receive the next steps</p>
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4"/>I give you permission to communicate with my referral source about my case. </p>
             <p className="text-left text-sm italic pl-6">*This authorization is good for 60 days.</p>
-            <div className="text-center my-10"><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-idlxoy38fk0o" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/enterprise/anchor?ar=1&amp;k=6Ld0J8IcAAAAANyrnxzrRlX1xrrdXsOmsepUYosy&amp;co=aHR0cHM6Ly93d3cuYnJpZGdlczJzdWNjZXNzLmNvbTo0NDM.&amp;hl=en&amp;v=9pvHvq7kSOTqqZusUzJ6ewaF&amp;theme=light&amp;size=normal&amp;cb=y6n5us26awsl"></iframe></div>
+            <div className="text-center my-10"><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-idlxoy38fk0o" className=" m-auto" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/enterprise/anchor?ar=1&amp;k=6Ld0J8IcAAAAANyrnxzrRlX1xrrdXsOmsepUYosy&amp;co=aHR0cHM6Ly93d3cuYnJpZGdlczJzdWNjZXNzLmNvbTo0NDM.&amp;hl=en&amp;v=9pvHvq7kSOTqqZusUzJ6ewaF&amp;theme=light&amp;size=normal&amp;cb=y6n5us26awsl"></iframe></div>
             <div className="text-center my-10"><button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto">Submit</button></div>
             
         </form>
