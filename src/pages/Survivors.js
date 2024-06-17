@@ -3,7 +3,7 @@ import React from "react";
 export default function Survivors() {
     return (
     <main className='bg-white p-4'>
-        <h3 className="text-3xl font-semibold my-10">Program Fees</h3>
+        <h3 className="text-3xl font-semibold my-10">Survivor’s Info</h3>
         <p className="font-semibold">!!WARNING!! If you are in immediate danger, please Call 911</p>
         <p>Or call the National Domestic Violence Hotline at 1 (800) 799-SAFE</p>
         <p className="mt-6">There are many ways that computers record everything you do on the computer and on the Internet.</p>
