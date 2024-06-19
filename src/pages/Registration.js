@@ -390,7 +390,7 @@ export default function Registration() {
                 </div>
 
             </form>
-            {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Your registration has been submitted! Please check your email for confirmation</p>}
+            {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Thank you for contacting us! We will reach out to you soon.</p>}
 
         </main>
 
