@@ -14,9 +14,9 @@
     <div >
 
 
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >New customer Contact:</p>
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >New customer contact:</p>
       <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Customer Email:&nbsp; <a href="mailto:{{ $email }}">{{ $email }}</a> </p>
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Message: <pre>{{ $messageFromCustomer }}</pre></p>
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Message: {{ $messageFromCustomer }}</p>
 
       <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" > -The Bridges 2 Success Team</p>
 
