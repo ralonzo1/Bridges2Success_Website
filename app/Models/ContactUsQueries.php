@@ -15,5 +15,5 @@ class ContactUsQueries extends Model
        'message',
     ];
 
-    protected $table = 'tblContactUsQueries';
+    protected $table = 'tblContactUs';
 }

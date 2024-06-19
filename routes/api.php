@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
+
 
 use App\Http\Controllers\UploadClientController;
 use App\Http\Controllers\ContactUsController;
@@ -25,3 +27,22 @@ Route::get('/', function (Request $request){
 });
 Route::post('/upload-client', [UploadClientController::class, 'store']);
 Route::post('/store-contact-us-query', [ContactUsController::class, 'store']);
+
+Route::post('/verify-recaptcha', function (Request $request) {
+    $recaptchaValue = $request->get('recaptchaToken');
+    $secretKey = env('RECAPTCHA_SECRET_KEY');
+
+    $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        'secret' => $secretKey,
+        'response' => $recaptchaValue,
+    ]);
+
+    $data = $response->json();
+
+    if ($data['success']) {
+        return response()->json(['success' => true]);
+    } else {
+//        return response()->json(['success' => false, 'error-codes' => $data['error-codes']]);
+        return response()->json(['success' => false]);
+    }
+});
