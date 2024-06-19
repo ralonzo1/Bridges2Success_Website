@@ -13,16 +13,12 @@
     </div>
     <div >
 
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Dear Admin,</p>
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >New customer enquiry:</p>
+
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >New customer Contact:</p>
       <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Customer Email:&nbsp; <a href="mailto:{{ $email }}">{{ $email }}</a> </p>
       <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Message: <pre>{{ $messageFromCustomer }}</pre></p>
-      <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" > Have a wonderful day!</p>
 
       <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" > -The Bridges 2 Success Team</p>
-
-      <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" > <a target="_blank" href="mailto:office@bridges2success.com"  style="text-decoration: underline; font-family: arial,sans-serif; line-height: 24px; font-size: 16px;" >office@bridges2success.com </a> |  Tel:  1.800.509.0794<br/> <a target="_blank" href="www.bridges2success.com"  style="text-decoration: underline; font-family: arial,sans-serif; line-height: 24px; font-size: 16px;" >www.bridges2success.com</a></p>
-
 
     </div>
 </body>
