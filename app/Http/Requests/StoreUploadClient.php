@@ -29,7 +29,7 @@ class StoreUploadClient extends FormRequest
             'DOB' => 'required|date',
             'gender' => 'required|string',
             'relationshipWithVictim' => 'required|string',
-            'preferredPronouns' => 'required|string',
+            'preferredPronouns' => 'sometimes|nullable|string',
             'streetAddress1' => 'sometimes|nullable|string',
             'streetAddress2' => 'sometimes|nullable|string',
             'city' => 'sometimes|nullable|string',
