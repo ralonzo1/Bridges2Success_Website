@@ -1,12 +1,71 @@
-
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 export default function Portal() {
   const [password, setPassword] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
 
-  const handleSubmit = (e) => {
+    const [errors, setErrors] = useState({});
+
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+    useEffect(() => {
+        const loadRecaptchaScript = () => {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+                script.async = true;
+                script.defer = true;
+                script.onload = resolve;
+                document.body.appendChild(script);
+            });
+        };
+
+        loadRecaptchaScript().then(() => {
+            window.grecaptcha.ready(() => {
+                window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
+                    setRecaptchaToken(token);
+                    console.log("Captcha token:", token);
+                });
+            });
+        });
+    }, [siteKey]);
+
+    const generateRecaptchaToken = () => {
+        return window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
+            setRecaptchaToken(token);
+            return token;
+        });
+    };
+
+    const handleSubmit = async (e) => {
       e.preventDefault();
+
+      const newErrors = {};
+      setErrors({});
+
+      const token = await generateRecaptchaToken();
+
+      if (!token) {
+          alert("reCAPTCHA token not available");
+          return;
+      }
+
+      const recaptchaVerify = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/verify-recaptcha`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ recaptchaToken }),
+      });
+
+      const result = await recaptchaVerify.json();
+      if (!result.success) {
+          newErrors.captcha = 'Please reload the page and try again';
+          setErrors(newErrors);
+          return;
+      }
+
       if (password === 'Success') {
           setAuthenticated(true);
       } else {
@@ -30,6 +89,7 @@ export default function Portal() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            {errors.captcha && <div className="text-center my-10"><span className="text-red-500">{errors.captcha}</span></div>}
             <button type="submit" className='bg-[#1b99e8] my-6 w-56 py-4 text-white block m-auto'>Go</button>
         </form>
         </div>

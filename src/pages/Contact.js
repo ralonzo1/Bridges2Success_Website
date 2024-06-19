@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 export default function Contact() {
 
   const [formData, setFormData] = useState({
@@ -13,8 +13,69 @@ export default function Contact() {
     setFormData({ ...formData, [name]: value });
   };
 
+    const [errors, setErrors] = useState({});
+
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+    useEffect(() => {
+        const loadRecaptchaScript = () => {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+                script.async = true;
+                script.defer = true;
+                script.onload = resolve;
+                document.body.appendChild(script);
+            });
+        };
+
+        loadRecaptchaScript().then(() => {
+            window.grecaptcha.ready(() => {
+                window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
+                    setRecaptchaToken(token);
+                    console.log("Captcha token:", token);
+                });
+            });
+        });
+    }, [siteKey]);
+
+    const generateRecaptchaToken = () => {
+        return window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
+            setRecaptchaToken(token);
+            return token;
+        });
+    };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+      const newErrors = {};
+      setErrors({});
+
+      const token = await generateRecaptchaToken();
+
+      if (!token) {
+          alert("reCAPTCHA token not available");
+          return;
+      }
+
+      const recaptchaVerify = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/verify-recaptcha`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ recaptchaToken }),
+      });
+
+      const result = await recaptchaVerify.json();
+      if (!result.success) {
+          newErrors.captcha = 'Please reload the page and try again';
+          setErrors(newErrors);
+
+          return;
+      }
+
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/store-contact-us-query`, {
         method: 'POST',
@@ -89,6 +150,9 @@ export default function Contact() {
           onChange={handleChange}
          />
       </div>
+          <div className="text-center my-10">
+              {errors.captcha && <span className="text-red-500">{errors.captcha}</span>}
+          </div>
       <div className="text-center my-10"><button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center">Submit</button></div>
       {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Thank you!</p>}
     </form>

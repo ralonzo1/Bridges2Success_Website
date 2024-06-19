@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export default function Registration() {
     const [isAgreeChecked, setIsAgreeChecked] = useState(false);
@@ -16,9 +16,66 @@ export default function Registration() {
     
     const [showThankYou, setShowThankYou] = useState(false);
 
+
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+    useEffect(() => {
+        const loadRecaptchaScript = () => {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+                script.async = true;
+                script.defer = true;
+                script.onload = resolve;
+                document.body.appendChild(script);
+            });
+        };
+
+        loadRecaptchaScript().then(() => {
+            window.grecaptcha.ready(() => {
+                window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
+                    setRecaptchaToken(token);
+                    console.log("Captcha token:", token);
+                });
+            });
+        });
+    }, [siteKey]);
+
+    const generateRecaptchaToken = () => {
+        return window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
+            setRecaptchaToken(token);
+            return token;
+        });
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
+        const newErrors = {};
+        const token = await generateRecaptchaToken();
+
+        if (!token) {
+            alert("reCAPTCHA token not available");
+            return;
+        }
+
+        const recaptchaVerify = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/verify-recaptcha`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ recaptchaToken }),
+        });
+
+        const result = await recaptchaVerify.json();
+        if (!result.success) {
+            newErrors.captcha = 'Please reload the page and try again';
+            setErrors(newErrors);
+
+            return;
+        }
+
         const formData = new FormData(event.target);
         const agreeValue = isAgreeChecked ? 1 : 0;
         const permissionValue = isPermissionChecked ? 1 : 0;
@@ -26,7 +83,6 @@ export default function Registration() {
         formData.set('chkPermission', permissionValue);
 
         // Validate fields
-        const newErrors = {};
         if (!formData.get('firstName')) {
             newErrors.firstName = 'First Name is required';
         }
@@ -263,7 +319,9 @@ export default function Registration() {
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkAgree" checked={isAgreeChecked} onChange={handleAgreeChange} className="mr-4 h-auto"/>I agree to follow through with  the remainder of my intake process when I receive the next steps</p>
             <p className="text-left italic pt-5"> <input type="checkbox" name="chkPermission" checked={isPermissionChecked} onChange={handlePermissionChange} className="mr-4 h-auto"/>I give you permission to communicate with my referral source about my case. </p>
             <p className="text-left text-sm italic pl-6">*This authorization is good for 60 days.</p>
-            <div className="text-center my-10"><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-idlxoy38fk0o" className=" m-auto" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/enterprise/anchor?ar=1&amp;k=6Ld0J8IcAAAAANyrnxzrRlX1xrrdXsOmsepUYosy&amp;co=aHR0cHM6Ly93d3cuYnJpZGdlczJzdWNjZXNzLmNvbTo0NDM.&amp;hl=en&amp;v=9pvHvq7kSOTqqZusUzJ6ewaF&amp;theme=light&amp;size=normal&amp;cb=y6n5us26awsl"></iframe></div>
+            <div className="text-center my-10">
+                {errors.captcha && <span className="text-red-500">{errors.captcha}</span>}
+            </div>
             <div className="text-center my-10"><button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto">Submit</button></div>
             
         </form>
