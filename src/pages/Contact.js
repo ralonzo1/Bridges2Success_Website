@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import RecaptchaComponent from '../Components/RecaptchaComponent';
+
 export default function Contact() {
 
   const [formData, setFormData] = useState({
@@ -16,6 +18,8 @@ export default function Contact() {
     const [errors, setErrors] = useState({});
 
     const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const [recaptchaTokenV2, setRecaptchaTokenV2] = useState(null);
+
     const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
     useEffect(() => {
@@ -34,7 +38,6 @@ export default function Contact() {
             window.grecaptcha.ready(() => {
                 window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
                     setRecaptchaToken(token);
-                    console.log("Captcha token:", token);
                 });
             });
         });
@@ -60,29 +63,47 @@ export default function Contact() {
           return;
       }
 
-      const recaptchaVerify = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/verify-recaptcha`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ recaptchaToken }),
-      });
-
-      const result = await recaptchaVerify.json();
-      if (!result.success) {
-          newErrors.captcha = 'Please reload the page and try again';
+      if (!recaptchaTokenV2) {
+          newErrors.captcha = 'Please complete the reCAPTCHA.';
           setErrors(newErrors);
-
           return;
       }
 
-    try {
+      const formDataObj = new FormData();
+
+      Object.keys(formData).forEach(key => {
+          formDataObj.append(key, formData[key]);
+      });
+
+      formDataObj.set('recaptchaToken', recaptchaToken);
+
+      const plainFormData = {};
+      formDataObj.forEach((value, key) => {
+          plainFormData[key] = value;
+      });
+
+
+      if (!formDataObj.get('email')) {
+          newErrors.email = 'Email is required';
+      }
+      if (!formDataObj.get('subject')) {
+          newErrors.subject = 'Subject is required';
+      }
+      if (!formDataObj.get('message')) {
+          newErrors.message = 'Message is required';
+      }
+      if (Object.keys(newErrors).length > 0) {
+          setErrors(newErrors);
+          return;
+      }
+
+      try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/store-contact-us-query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(plainFormData)
       });
       if (response.ok) {
         // Handle success
@@ -128,6 +149,8 @@ export default function Contact() {
           value={formData.email}
           onChange={handleChange}
         />
+          {errors.email && <span className="text-red-500">{errors.email}</span>}
+
       </div>
       <div className="w-full mb-4">
         <label>Subject*</label>
@@ -139,6 +162,8 @@ export default function Contact() {
           value={formData.subject}
           onChange={handleChange}
         />
+          {errors.subject && <span className="text-red-500">{errors.subject}</span>}
+
       </div>
       <div className="w-full mb-4">
         <label>Your message</label>
@@ -149,7 +174,10 @@ export default function Contact() {
           value={formData.message}
           onChange={handleChange}
          />
+          {errors.message && <span className="text-red-500">{errors.message}</span>}
+
       </div>
+          <RecaptchaComponent onVerify={setRecaptchaTokenV2} />
           <div className="text-center my-10">
               {errors.captcha && <span className="text-red-500">{errors.captcha}</span>}
           </div>

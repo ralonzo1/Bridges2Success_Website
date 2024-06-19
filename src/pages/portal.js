@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import RecaptchaComponent from '../Components/RecaptchaComponent';
 
 export default function Portal() {
   const [password, setPassword] = useState('');
@@ -7,6 +8,8 @@ export default function Portal() {
     const [errors, setErrors] = useState({});
 
     const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const [recaptchaTokenV2, setRecaptchaTokenV2] = useState(null);
+
     const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
     useEffect(() => {
@@ -25,7 +28,6 @@ export default function Portal() {
             window.grecaptcha.ready(() => {
                 window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
                     setRecaptchaToken(token);
-                    console.log("Captcha token:", token);
                 });
             });
         });
@@ -51,23 +53,33 @@ export default function Portal() {
           return;
       }
 
-      const recaptchaVerify = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/verify-recaptcha`, {
+        if (!recaptchaTokenV2) {
+            newErrors.captcha = 'Please complete the reCAPTCHA.';
+            setErrors(newErrors);
+            return;
+        }
+
+        const formDataObj = new FormData();
+        formDataObj.set('recaptchaToken', recaptchaToken);
+        formDataObj.set('password', password);
+
+        const plainFormData = {};
+        formDataObj.forEach((value, key) => {
+            plainFormData[key] = value;
+        });
+
+        const recaptchaVerify = await fetch(`${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_PREFIX}/verify-portal-access`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ recaptchaToken }),
+            body: JSON.stringify(plainFormData)
       });
 
       const result = await recaptchaVerify.json();
-      if (!result.success) {
-          newErrors.captcha = 'Please reload the page and try again';
-          setErrors(newErrors);
-          return;
-      }
-
-      if (password === 'Success') {
+      if (result.success) {
           setAuthenticated(true);
+          return;
       } else {
           alert('Incorrect password');
       }
@@ -89,6 +101,11 @@ export default function Portal() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+
+            <div className="text-center my-10">
+                <RecaptchaComponent onVerify={setRecaptchaTokenV2} />
+            </div>
+
             {errors.captcha && <div className="text-center my-10"><span className="text-red-500">{errors.captcha}</span></div>}
             <button type="submit" className='bg-[#1b99e8] my-6 w-56 py-4 text-white block m-auto'>Go</button>
         </form>
