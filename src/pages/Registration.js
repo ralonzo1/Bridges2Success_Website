@@ -7,7 +7,18 @@ import Modal from 'react-modal';
 
 const MAX_FILE_SIZE = 10485760; // 10 MB in bytes
 const MAX_FILE_SIZE_FOR_CROPPING = MAX_FILE_SIZE * 2; // Allow up to 20 MB for cropping
-const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/png'];
+
+const ACCEPTED_FILE_TYPES = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/gif',
+    'image/bmp',
+    'image/tiff',
+    'image/webp',
+    'image/heic',
+    'image/heif',
+];
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
