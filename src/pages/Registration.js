@@ -5,8 +5,9 @@ import Cropper from 'react-easy-crop';
 import getCroppedImg from '../Components/cropImage'; // A utility function to get the cropped image
 import Modal from 'react-modal';
 
-const MAX_FILE_SIZE = 1048576; // 1 MB in bytes
-const MAX_FILE_SIZE_FOR_CROPPING = MAX_FILE_SIZE * 20; // Allow up to 20 MB for cropping
+const MAX_FILE_SIZE = 10485760; // 10 MB in bytes
+const MAX_FILE_SIZE_FOR_CROPPING = MAX_FILE_SIZE * 2; // Allow up to 20 MB for cropping
+const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/png'];
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
@@ -24,18 +25,6 @@ export default function Registration() {
     const [finalFile, setFinalFile] = useState(null);
 
     const fileInputRef = useRef(null);
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setSelectedFile(URL.createObjectURL(file));
-            if (file.size > MAX_FILE_SIZE) {
-                setModalIsOpen(true); // Open the modal for cropping if file size is large
-            } else {
-                setFinalFile(file); // Directly set the file if size is within limit
-            }
-        }
-    };
 
     const onDrop = useCallback((acceptedFiles, fileRejections) => {
         if (fileRejections.length > 0) {
@@ -55,13 +44,21 @@ export default function Registration() {
             return;
         }
         const file = acceptedFiles[0];
+        if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
+            setError('Invalid file type. Accepted types are .jpeg, .png');
+            return;
+        }
         const reader = new FileReader();
         reader.onload = (e) => {
             setSelectedFile(e.target.result);
             setError('');
+
+            console.log(file);
+
             if (file.size > MAX_FILE_SIZE) {
                 setModalIsOpen(true); // Open the modal for cropping if file size is large
             } else {
+                setCroppedImage(e.target.result); // Directly set the image if size is within limit
                 setFinalFile(file); // Directly set the file if size is within limit
             }
         };
@@ -70,7 +67,7 @@ export default function Registration() {
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        accept: 'image/jpeg, image/png',
+        accept: ACCEPTED_FILE_TYPES.join(','),
         maxSize: MAX_FILE_SIZE_FOR_CROPPING, // Allow larger files for cropping
     });
 
@@ -414,11 +411,11 @@ export default function Registration() {
                                 />
                             ) : (
                                 <>
-                                    <p className="mb-2 mt-3 text-base text-[#373B4D] italic leading-10">
+                                    <p className="mt-3 text-base text-[#373B4D] italic">
                                         Upload Photo <span className="text-2xl font-semibold">+</span>
                                     </p>
                                     <p className="text-sm text-gray-500">
-                                        (Accepted file types: .jpeg, .png, Max size: {MAX_FILE_SIZE / (1024 * 1024)} MB)
+                                        (Accepted file types: {ACCEPTED_FILE_TYPES.map(type => type.split('/')[1]).join(', ')}, Max size: {MAX_FILE_SIZE / (1024 * 1024)} MB)
                                     </p>
                                 </>
                             )}
@@ -466,6 +463,7 @@ export default function Registration() {
                         image={selectedFile}
                         crop={crop}
                         zoom={zoom}
+                        aspect={3 / 4} // Set the aspect ratio to 3/4
                         onCropChange={setCrop}
                         onZoomChange={setZoom}
                         onCropComplete={onCropComplete}
