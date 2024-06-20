@@ -1,25 +1,99 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import RecaptchaComponent from '../Components/RecaptchaComponent';
+import { useDropzone } from 'react-dropzone';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../Components/cropImage'; // A utility function to get the cropped image
+import Modal from 'react-modal';
+
+const MAX_FILE_SIZE = 1048576; // 1 MB in bytes
+const MAX_FILE_SIZE_FOR_CROPPING = MAX_FILE_SIZE * 20; // Allow up to 20 MB for cropping
+
+Modal.setAppElement('#root'); // Set the root element for accessibility
 
 export default function Registration() {
     const [isAgreeChecked, setIsAgreeChecked] = useState(false);
     const [isPermissionChecked, setIsPermissionChecked] = useState(false);
 
     const [selectedFile, setSelectedFile] = useState(null);
+    const [error, setError] = useState('');
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+    const [croppedImage, setCroppedImage] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [finalFile, setFinalFile] = useState(null);
+
     const fileInputRef = useRef(null);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             setSelectedFile(URL.createObjectURL(file));
+            if (file.size > MAX_FILE_SIZE) {
+                setModalIsOpen(true); // Open the modal for cropping if file size is large
+            } else {
+                setFinalFile(file); // Directly set the file if size is within limit
+            }
         }
     };
 
+    const onDrop = useCallback((acceptedFiles, fileRejections) => {
+        if (fileRejections.length > 0) {
+            const { errors } = fileRejections[0];
+            const errorMessage = errors
+                .map((e) => {
+                    if (e.code === 'file-too-large') {
+                        return `File is too large. Max size is ${MAX_FILE_SIZE / (1024 * 1024)} MB`;
+                    } else if (e.code === 'file-invalid-type') {
+                        return `Invalid file type. Accepted types are .jpeg, .png`;
+                    } else {
+                        return e.message;
+                    }
+                })
+                .join(', ');
+            setError(errorMessage);
+            return;
+        }
+        const file = acceptedFiles[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            setSelectedFile(e.target.result);
+            setError('');
+            if (file.size > MAX_FILE_SIZE) {
+                setModalIsOpen(true); // Open the modal for cropping if file size is large
+            } else {
+                setFinalFile(file); // Directly set the file if size is within limit
+            }
+        };
+        reader.readAsDataURL(file);
+    }, []);
+
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop,
+        accept: 'image/jpeg, image/png',
+        maxSize: MAX_FILE_SIZE_FOR_CROPPING, // Allow larger files for cropping
+    });
+
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels);
+    }, []);
+
+    const showCroppedImage = useCallback(async () => {
+        try {
+            const { croppedImage, croppedFile } = await getCroppedImg(selectedFile, croppedAreaPixels);
+            setCroppedImage(croppedImage);
+            setFinalFile(croppedFile);
+            setModalIsOpen(false); // Close the modal after cropping
+        } catch (e) {
+            console.error(e);
+        }
+    }, [croppedAreaPixels, selectedFile]);
+
     const removeSelectedFile = () => {
         setSelectedFile(null);
-        if (fileInputRef.current) {
-            fileInputRef.current.value = ''; // Clear the file input
-        }
+        setCroppedImage(null);
+        setFinalFile(null);
+        setModalIsOpen(false); // Ensure modal is closed
     };
 
     const [errors, setErrors] = useState({});
@@ -33,7 +107,6 @@ export default function Registration() {
     };
 
     const [showThankYou, setShowThankYou] = useState(false);
-
 
     const [recaptchaToken, setRecaptchaToken] = useState(null);
     const [recaptchaTokenV2, setRecaptchaTokenV2] = useState(null);
@@ -54,7 +127,7 @@ export default function Registration() {
 
         loadRecaptchaScript().then(() => {
             window.grecaptcha.ready(() => {
-                window.grecaptcha.execute(siteKey, {action: 'submit'}).then((token) => {
+                window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
                     setRecaptchaToken(token);
                 });
             });
@@ -62,7 +135,7 @@ export default function Registration() {
     }, [siteKey]);
 
     const generateRecaptchaToken = () => {
-        return window.grecaptcha.execute(siteKey, {action: 'submit'}).then((token) => {
+        return window.grecaptcha.execute(siteKey, { action: 'submit' }).then((token) => {
             setRecaptchaToken(token);
             return token;
         });
@@ -89,9 +162,12 @@ export default function Registration() {
         const agreeValue = isAgreeChecked ? 1 : 0;
         const permissionValue = isPermissionChecked ? 1 : 0;
         formData.set('recaptchaToken', recaptchaToken);
-
         formData.set('chkAgree', agreeValue);
         formData.set('chkPermission', permissionValue);
+
+        if (finalFile) {
+            formData.set('pictureFile', finalFile, finalFile.name);
+        }
 
         // Validate fields
         if (!formData.get('firstName')) {
@@ -129,7 +205,7 @@ export default function Registration() {
             newErrors.isAgreeChecked = 'You must agree to follow through with the remainder of your intake process.';
         }
 
-        if(!isPermissionChecked){
+        if (!isPermissionChecked) {
             newErrors.isPermissionChecked = 'You must give permission to communicate with your referral source.';
         }
 
@@ -192,13 +268,11 @@ export default function Registration() {
                         <label>First Name*</label>
                         <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="First Name"/>
                         {errors.firstName && <span className="text-red-500">{errors.firstName}</span>}
-
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Last Name*</label>
                         <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Last Name"/>
                         {errors.lastName && <span className="text-red-500">{errors.lastName}</span>}
-
                     </div>
                 </div>
                 <div className="flex flex-wrap mb-4">
@@ -263,7 +337,6 @@ export default function Registration() {
                         <label>Zip code</label>
                         <input name="zipCode" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Postal / Zip code"/>
                     </div>
-
                 </div>
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
@@ -271,12 +344,10 @@ export default function Registration() {
                         <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone"/>
                         {errors.phone && <span className="text-red-500">{errors.phone}</span>}
                     </div>
-
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Email*</label>
                         <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email"/>
                         {errors.email && <span className="text-red-500">{errors.email}</span>}
-
                     </div>
                 </div>
                 <div className="flex flex-wrap mb-4">
@@ -284,7 +355,6 @@ export default function Registration() {
                         <label>Program(s) being referred to*</label>
                         <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)"/>
                         {errors.programsReferredTo && <span className="text-red-500">{errors.programsReferredTo}</span>}
-
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Referral Source Name*</label>
@@ -328,40 +398,34 @@ export default function Registration() {
                 </div>
                 <p className="italic pt-5">Please upload a clear photo of your face. (Please note that your referral source will be able to see this photo) </p>
                 <div className="flex items-center justify-center w-full">
-                    <label
-                        htmlFor="dropzone-file"
-                        className="relative flex flex-col items-center justify-center w-full h-16 border border-black cursor-pointer bg-[#DAEDFF]"
+                    <div
+                        {...getRootProps({
+                            className:
+                                'relative flex flex-col items-center justify-center w-full h-16 border border-black cursor-pointer bg-[#DAEDFF]',
+                        })}
                     >
+                        <input {...getInputProps()} />
                         <div className="flex flex-col items-center justify-center w-full h-full">
-                            {selectedFile ? (
-                                <div className="relative w-full h-full">
-                                    <img src={selectedFile} alt="Selected" className="w-full h-full object-contain" />
-                                    <button
-                                        type="button"
-                                        onClick={removeSelectedFile}
-                                        className="absolute top-0 right-0 mt-2 mr-2 text-white bg-red-500 rounded-full p-1"
-                                        style={{ fontSize: '13px', width: '26px', height: '26px' }}
-                                    >
-                                        X
-                                    </button>
-                                </div>
+                            {croppedImage ? (
+                                <img
+                                    src={croppedImage}
+                                    alt="Cropped"
+                                    className="w-full h-full object-contain"
+                                />
                             ) : (
-                                <p className="mb-2 mt-3 text-base text-[#373B4D] italic leading-10">
-                                    Upload Photo <span className="text-2xl font-semibold">+</span>
-                                </p>
+                                <>
+                                    <p className="mb-2 mt-3 text-base text-[#373B4D] italic leading-10">
+                                        Upload Photo <span className="text-2xl font-semibold">+</span>
+                                    </p>
+                                    <p className="text-sm text-gray-500">
+                                        (Accepted file types: .jpeg, .png, Max size: {MAX_FILE_SIZE / (1024 * 1024)} MB)
+                                    </p>
+                                </>
                             )}
                         </div>
-                        <input
-                            id="dropzone-file"
-                            type="file"
-                            name="pictureFile"
-                            className="hidden"
-                            onChange={handleFileChange}
-                            ref={fileInputRef}
-
-                        />
-                    </label>
+                    </div>
                 </div>
+                {error && <p className="text-red-500 mt-2">{error}</p>}
                 <p className="text-left italic pt-5">
                     <input type="checkbox" name="chkAgree"
                            checked={isAgreeChecked}
@@ -388,11 +452,42 @@ export default function Registration() {
                 <div className="text-center my-10">
                     <button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto">Submit</button>
                 </div>
-
             </form>
             {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Thank you for contacting us! We will reach out to you soon.</p>}
-
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={removeSelectedFile}
+                contentLabel="Crop Image"
+                className="modal"
+                overlayClassName="overlay"
+            >
+                <div className="relative w-full h-64">
+                    <Cropper
+                        image={selectedFile}
+                        crop={crop}
+                        zoom={zoom}
+                        onCropChange={setCrop}
+                        onZoomChange={setZoom}
+                        onCropComplete={onCropComplete}
+                    />
+                    <button
+                        type="button"
+                        onClick={showCroppedImage}
+                        className="absolute bottom-0 left-0 mb-2 ml-2 text-white bg-blue-500 rounded-full p-1"
+                        style={{ fontSize: '13px', width: '80px', height: '26px' }}
+                    >
+                        Crop
+                    </button>
+                    <button
+                        type="button"
+                        onClick={removeSelectedFile}
+                        className="absolute top-0 right-0 mt-2 mr-2 text-white bg-red-500 rounded-full p-1"
+                        style={{ fontSize: '13px', width: '26px', height: '26px' }}
+                    >
+                        X
+                    </button>
+                </div>
+            </Modal>
         </main>
-
     );
 }
