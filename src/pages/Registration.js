@@ -64,14 +64,7 @@ export default function Registration() {
             setSelectedFile(e.target.result);
             setError('');
 
-            console.log(file);
-
-            if (file.size > MAX_FILE_SIZE) {
                 setModalIsOpen(true); // Open the modal for cropping if file size is large
-            } else {
-                setCroppedImage(e.target.result); // Directly set the image if size is within limit
-                setFinalFile(file); // Directly set the file if size is within limit
-            }
         };
         reader.readAsDataURL(file);
     }, []);
