@@ -44,6 +44,8 @@ class UploadClient extends Model
         'AttendingLocation',
         'chkAgree',
         'chkPermission',
+        'VictimName',
+        'Pronouns',
     ];
 
     /**

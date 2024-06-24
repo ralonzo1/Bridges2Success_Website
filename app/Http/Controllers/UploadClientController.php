@@ -30,7 +30,7 @@ class UploadClientController extends Controller
             'DOB' => date($request->DOB),
             'Gender' => $request->gender,
             'VictimName' => $request->relationshipWithVictim,
-            'PreferredPronouns' => $request->preferredPronouns,
+            'Pronouns' => $request->preferredPronouns,
             'Address1' => $request->streetAddress1,
             'Address2' => $request->streetAddress2,
             'City' => $request->city,
