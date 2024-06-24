@@ -63,6 +63,12 @@ return [
             'throw' => false,
         ],
 
+        'cpo' => [
+            'driver' => 'local',
+            'root' => env('CLIENT_PROFILE_PATH_CPO'),
+            'visibility' => 'private',
+        ],
+
     ],
 
     /*

@@ -54,7 +54,7 @@ class UploadClientController extends Controller
             $uploadedFile = $request->file('pictureFile');
             $name = time() . "." . $uploadedFile->getClientOriginalExtension();
             $filePath = env('CLIENT_PROFILE_PATH') . $name;
-            Storage::disk('s3')->put($filePath, file_get_contents($uploadedFile));
+            Storage::disk('cpo')->put($filePath, file_get_contents($uploadedFile));
             $data['PictureFile'] = $filePath;
         }
 
