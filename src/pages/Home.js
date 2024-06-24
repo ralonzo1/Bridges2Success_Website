@@ -4,7 +4,7 @@ export default function Home() {
     return (
     <main className='bg-white p-4'>
       <div className='text-center'>
-        <img src ="./images/logo.png"  className='m-auto'/>
+        <img src ="./images/logo.jpg"  className='m-auto'/>
       </div>
       <div >
           <p ><a href="http://bridges2safety.com" target="_blank" className='font-bold' rel="noreferrer noopener">Bridges 2 Success </a> began its work to end domestic violence in 2000, founded by Lynda Bridges in Albany Oregon, with a clear focus on victim safety through abuse intervention. We believe that every individual is capable of change, and deserving of a life healthy/abuse free relationships. We look forward to partnering with you to help achieve success in all areas of your life. </p>
