@@ -14,9 +14,7 @@
     <div >
       <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >This is your proof of registration with the Bridges 2 Success Program to show your referral source.</p>
       <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Please store our contact information in your phone so that we can easily communicate with each other:</p>
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Please store our contact information in your phone so that we can easily communicate with each other:</p>
-
-
+     
        <p style="font-family: arial,sans-serif; line-height: 26px; font-size: 16px; margin-top: 10px;margin-bottom: 25px;"><span style="font-weight: bold; line-height: 10px; font-size: 16px;" >Phone:</span> 1-800-509-0794<br />
        <span style="font-weight: bold; line-height: 16px; font-size: 16px;" >E-Mail:</span> <a target="_blank" href="mailto:office@bridges2success.com"  style="font-family: arial,sans-serif; line-height: 16px; font-size: 16px; text-decoration: underline;" >office@bridges2success.com</a></p>
 
@@ -29,19 +27,20 @@
 
        <ul style="font-size: 16px; line-height: 24px; padding: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-left: 24px; padding-right: 0px;" >
         <li style="text-align: left; font-size: 16px; line-height: 24px;" >
-          <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;" >Cashapp: $bridges2success12 (you may pay using our cashtag, or <a target="_blank" href="mailto:office@bridges2success.com"  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;" >office@bridges2success.com</a></p>
+          <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;" >Cashapp: $bridges2success12 (you may pay using our cashtag, or <a target="_blank" href="mailto:office@bridges2success.com"  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;" >office@bridges2success.com</a> (2.75% fee)</p>
         </li>
          <li style="text-align: left; font-size: 16px; line-height: 24px;" >
-          <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" >    Venmo: @bridges2success12 (if they ask for a phone number to verify, it is 4893)</p>
+          <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" >    Venmo: @bridges2success12 (if they ask for a phone number to verify, it is 4893)(any fees assessed are your responsibility)</p>
         </li>
          <li style="text-align: left; font-size: 16px; line-height: 24px;" >
           <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" >    E-mail us and ask that we send you an invoice from square.</p>
         </li>
-         <li style="text-align: left; font-size: 16px; line-height: 24px;" >
-          <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" >    If you need to pay in person, please give us a call as hours vary by location.</p>
-        </li>
+          </ul>
 
-      </ul>
+         <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px; font-weight: bold;">    Please note that no refunds will be offered in anything other than services. No cash refunds.</p>
+
+
+    
           <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" ><span style="font-weight: bold; line-height: 24px; font-size: 16px;" >  Step Two: </span> You will receive the intake packet from Adobe Sign within 2 business days of making your payment. If you do not see it, please check your spam/junk filter.<br> Please read through, initial, and sign each of these documents. Make sure that when filling out the assessment documents that you read them, thoroughly, and choose the correct answer from the drop-down menus to ensure that you are assessed accurately.</p>
 
           <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" >   If you have any questions regarding these forms, please feel free to call us, e-mail us, and/or attend one of the informational sessions via ZOOM; the links are listed at the bottom of the e-mail.</p>
