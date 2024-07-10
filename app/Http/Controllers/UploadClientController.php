@@ -46,6 +46,7 @@ class UploadClientController extends Controller
             'chkAgree' => $request->chkAgree ? 1 : 0,
             'chkPermission' => $request->chkPermission ? 1 : 0,
             'AllowEmail' => 1,
+            'FullName' => $request->lastName . ', '. $request->firstName,
         ];
 
         // Check file present in request
