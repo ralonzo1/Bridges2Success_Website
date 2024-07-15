@@ -46,6 +46,8 @@ class UploadClient extends Model
         'chkPermission',
         'VictimName',
         'Pronouns',
+        'FullName',
+        'AllowEmail',
     ];
 
     /**
