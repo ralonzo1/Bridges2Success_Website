@@ -48,6 +48,7 @@ class UploadClient extends Model
         'Pronouns',
         'FullName',
         'AllowEmail',
+        'Remarks',
     ];
 
     /**
