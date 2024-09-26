@@ -25,6 +25,7 @@ Modal.setAppElement('#root'); // Set the root element for accessibility
 export default function Registration() {
     const [isAgreeChecked, setIsAgreeChecked] = useState(false);
     const [isPermissionChecked, setIsPermissionChecked] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false); // Track form submission state
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [error, setError] = useState('');
@@ -160,16 +161,20 @@ export default function Registration() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        setIsSubmitting(true);
+
         const newErrors = {};
         const token = await generateRecaptchaToken();
 
         if (!token) {
             alert("reCAPTCHA token not available");
+            setIsSubmitting(false);
             return;
         }
 
         if (!recaptchaTokenV2) {
             newErrors.captcha = 'Please complete the reCAPTCHA.';
+            setIsSubmitting(false);
             setErrors(newErrors);
             return;
         }
@@ -243,6 +248,7 @@ export default function Registration() {
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
+            setIsSubmitting(false);
             return;
         }
 
@@ -263,6 +269,8 @@ export default function Registration() {
         } catch (error) {
             console.error('Error submitting form:', error);
             alert('An error occurred. Please try again.');
+        } finally {
+            setIsSubmitting(false); // Re-enable submit button after response is received
         }
     };
 
@@ -483,7 +491,9 @@ export default function Registration() {
                     {errors.captcha && <span className="text-red-500">{errors.captcha}</span>}
                 </div>
                 <div className="text-center my-10">
-                    <button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto">Submit</button>
+                    <button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto"
+                            disabled={isSubmitting}>Submit</button>
+                    {isSubmitting && <div className="loader m-auto mt-4"></div>}
                 </div>
             </form>
             {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Thank you for contacting us! We will reach out to you soon.</p>}
