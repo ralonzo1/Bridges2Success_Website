@@ -38,4 +38,14 @@ Route::middleware(['verify.recaptcha'])->group(function () {
 
         return response()->json(['success' => false]);
     });
+    Route::post('/verify-video-access', function (Request $request) {
+        if ($request->has('password')) {
+            $pass = $request->get('password');
+            if ($pass === env('VIDEO_PASS', 'B2SVideos')) {
+                return response()->json(['success' => true]);
+            }
+        }
+
+        return response()->json(['success' => false]);
+    });
 });

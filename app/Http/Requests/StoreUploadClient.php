@@ -40,7 +40,7 @@ class StoreUploadClient extends FormRequest
             'programsReferredTo' => 'required|string',
             'referredBy' => 'required|string',
             'intakePreference' => 'required|string',
-            'location' => 'string',
+            'location' => 'required|string',
             'additionalNotes' => 'string',
             'pictureFile' => 'file|mimes:jpg,jpeg,png',
             'chkAgree' => 'required|boolean|accepted:true',
