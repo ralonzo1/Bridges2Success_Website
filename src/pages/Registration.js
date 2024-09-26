@@ -486,7 +486,7 @@ export default function Registration() {
                 </p>
                 {errors.isPermissionChecked && <span className="text-red-500 text-sm ml-2">{errors.isPermissionChecked}</span>}
                 <p className="text-left text-sm italic pl-6">*This authorization is good for 60 days.</p>
-                <div className="text-center my-10">
+                <div className="text-center my-10 flex justify-center">
                     <RecaptchaComponent onVerify={setRecaptchaTokenV2} />
                     {errors.captcha && <span className="text-red-500">{errors.captcha}</span>}
                 </div>
