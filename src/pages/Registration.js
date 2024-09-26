@@ -35,6 +35,21 @@ export default function Registration() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [finalFile, setFinalFile] = useState(null);
 
+    const firstNameRef = useRef(null)
+    const lastNameRef = useRef(null)
+    const DOBRef = useRef(null)
+    const genderRef = useRef(null)
+    const relationshipWithVictimRef = useRef(null)
+    const phoneRef = useRef(null)
+    const emailRef = useRef(null)
+    const programsReferredToRef = useRef(null)
+    const referredByRef = useRef(null)
+    const intakePreferenceRef = useRef(null)
+    const locationRef = useRef(null)
+    const chkAgreeRef = useRef(null)
+    const chkPermissionRef = useRef(null)
+
+
     const fileInputRef = useRef(null);
 
     const onDrop = useCallback((acceptedFiles, fileRejections) => {
@@ -173,41 +188,57 @@ export default function Registration() {
         // Validate fields
         if (!formData.get('firstName')) {
             newErrors.firstName = 'First Name is required';
+            firstNameRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('lastName')) {
             newErrors.lastName = 'Last Name is required';
+            lastNameRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('DOB')) {
             newErrors.DOB = 'Date of Birth is required';
+            DOBRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('gender')) {
             newErrors.gender = 'Gender is required';
+            genderRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('relationshipWithVictim')) {
             newErrors.relationshipWithVictim = 'Relationship to Victim is required';
+            relationshipWithVictimRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('phone')) {
             newErrors.phone = 'Phone is required';
+            phoneRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('email')) {
             newErrors.email = 'Email is required';
+            emailRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('programsReferredTo')) {
             newErrors.programsReferredTo = 'Program(s) being referred to is required';
+            programsReferredToRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('referredBy')) {
             newErrors.referredBy = 'Referral Source Name is required';
+            referredByRef.current.scrollIntoView({behavior:'smooth'})
         }
         if (!formData.get('intakePreference')) {
             newErrors.intakePreference = 'Intake preference is required';
+            intakePreferenceRef.current.scrollIntoView({behavior:'smooth'})
+        }
+        if (!formData.get('location')) {
+            newErrors.location = 'Location is required';
+            locationRef.current.scrollIntoView({behavior:'smooth'})
         }
 
         if (!isAgreeChecked) {
             newErrors.isAgreeChecked = 'You must agree to follow through with the remainder of your intake process.';
+            chkAgreeRef.current.scrollIntoView({behavior:'smooth'})
         }
 
         if (!isPermissionChecked) {
             newErrors.isPermissionChecked = 'You must give permission to communicate with your referral source.';
+            chkPermissionRef.current.scrollIntoView({behavior:'smooth'})
         }
 
         if (Object.keys(newErrors).length > 0) {
@@ -267,24 +298,24 @@ export default function Registration() {
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
                         <label>First Name*</label>
-                        <input name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="First Name"/>
+                        <input ref={firstNameRef} name="firstName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="First Name"/>
                         {errors.firstName && <span className="text-red-500">{errors.firstName}</span>}
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Last Name*</label>
-                        <input name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Last Name"/>
+                        <input ref={lastNameRef} name="lastName" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Last Name"/>
                         {errors.lastName && <span className="text-red-500">{errors.lastName}</span>}
                     </div>
                 </div>
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
                         <label>DOB*</label>
-                        <input name="DOB" type="date" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Date of Birth"/>
+                        <input ref={DOBRef} name="DOB" type="date" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Date of Birth"/>
                         {errors.DOB && <span className="text-red-500">{errors.DOB}</span>}
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Gender*</label>
-                        <select name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                        <select ref={genderRef} name="gender" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                             <option value="">Choose an option</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -295,7 +326,7 @@ export default function Registration() {
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Relationship to Victim*</label>
-                        <select name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                        <select ref={relationshipWithVictimRef} name="relationshipWithVictim" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                             <option value="">Choose an option</option>
                             <option value="Intimate Partner">Intimate Partner</option>
                             <option value="Family Member">Family Member</option>
@@ -342,31 +373,31 @@ export default function Registration() {
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Phone*</label>
-                        <input name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone"/>
+                        <input ref={phoneRef} name="phone" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Phone"/>
                         {errors.phone && <span className="text-red-500">{errors.phone}</span>}
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Email*</label>
-                        <input name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email"/>
+                        <input ref={emailRef} name="email" type="email" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Email"/>
                         {errors.email && <span className="text-red-500">{errors.email}</span>}
                     </div>
                 </div>
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Program(s) being referred to*</label>
-                        <input name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)"/>
+                        <input ref={programsReferredToRef} name="programsReferredTo" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Program(s)"/>
                         {errors.programsReferredTo && <span className="text-red-500">{errors.programsReferredTo}</span>}
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Referral Source Name*</label>
-                        <input name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc"/>
+                        <input ref={referredByRef} name="referredBy" type="text" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Name of PO, Judge, etc"/>
                         {errors.referredBy && <span className="text-red-500">{errors.referredBy}</span>}
                     </div>
                 </div>
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
                         <label>Intake preference*</label>
-                        <select name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                        <select ref={intakePreferenceRef} name="intakePreference" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                             <option value="">Please select</option>
                             <option value="Online">Online</option>
                             <option value="In Person">In Person</option>
@@ -374,8 +405,8 @@ export default function Registration() {
                         {errors.intakePreference && <span className="text-red-500">{errors.intakePreference}</span>}
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
-                        <label>Location</label>
-                        <select name="location" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
+                        <label>Location*</label>
+                        <select ref={locationRef} name="location" className="block w-full bg-[#DAEDFF] border-2 p-2 border-black mt-2 focus-visible:outline-[#FF4040]">
                             <option value="">Choose an office</option>
                             <option value="Salem">Salem</option>
                             <option value="Wilsonville">Wilsonville</option>
@@ -388,6 +419,7 @@ export default function Registration() {
                             <option value="Hillsboro">Hillsboro</option>
                             <option value="Tillamook">Tillamook</option>
                         </select>
+                        {errors.location && <span className="text-red-500">{errors.location}</span>}
                     </div>
                 </div>
                 <p className="italic pb-5">Please note that completing your intake online requires the use of a computer to complete the necessary paperwork, it can not be completed on your phone or tablet.</p>
@@ -428,7 +460,7 @@ export default function Registration() {
                 </div>
                 {error && <p className="text-red-500 mt-2">{error}</p>}
                 <p className="text-left italic pt-5">
-                    <input type="checkbox" name="chkAgree"
+                    <input type="checkbox" ref={chkAgreeRef} name="chkAgree"
                            checked={isAgreeChecked}
                            onChange={handleAgreeChange}
                            className="mr-4 h-auto"
@@ -438,7 +470,7 @@ export default function Registration() {
                 <p className="text-left italic pt-5">
                     <input
                         type="checkbox"
-                        name="chkPermission"
+                        ref={chkPermissionRef} name="chkPermission"
                         checked={isPermissionChecked}
                         onChange={handlePermissionChange}
                         className="mr-4 h-auto"

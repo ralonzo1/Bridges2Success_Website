@@ -11,6 +11,7 @@ import Grievance from "./pages/Grievance";
 import Attendance from "./pages/Attendance";
 import Registration from "./pages/Registration";
 import Portal from "./pages/portal";
+import Videos from "./pages/videos";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/attendance" element={<Attendance />} />     
           <Route path="/registration" element={<Registration />} />    
           <Route path="/portal" element={<Portal />} />     
+          <Route path="/videos" element={<Videos />} />
         </Route>
     </Routes>  
     </BrowserRouter>

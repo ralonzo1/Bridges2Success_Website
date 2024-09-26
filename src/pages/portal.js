@@ -12,6 +12,14 @@ export default function Portal() {
 
     const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
+
+    useEffect(() => {
+        const isAuthenticated = sessionStorage.getItem('authenticated_portal');
+        if (isAuthenticated) {
+            setAuthenticated(true);
+        }
+    }, []);
+
     useEffect(() => {
         const loadRecaptchaScript = () => {
             return new Promise((resolve) => {
@@ -79,6 +87,7 @@ export default function Portal() {
       const result = await recaptchaVerify.json();
       if (result.success) {
           setAuthenticated(true);
+          sessionStorage.setItem('authenticated_portal', 'true');
           return;
       } else {
           alert('Incorrect password');
