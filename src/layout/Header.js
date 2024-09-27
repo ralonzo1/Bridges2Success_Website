@@ -90,7 +90,6 @@ export default function Header() {
                         <a href="grievance" className={`block w-full font-medium text-lg text-left px-3 py-2 ${currentPath === '/grievance' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Grievance Policy</a>
                         <a href="attendance" className={`block w-full font-medium text-lg text-left px-3 py-2  ${currentPath === '/attendance' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Attendance Policy</a>
                         <a href="portal" className={`block w-full font-medium text-lg text-left px-3 py-2 ${currentPath === '/portal' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Program Portal</a>
-                        <a href="videos" className={`block w-full font-medium text-lg text-left px-3 py-2 ${currentPath === '/videos' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Videos</a>
 
                         </div>
                     </div>
@@ -117,7 +116,6 @@ export default function Header() {
                                 <a href="grievance" className={`block w-full font-medium text-lg text-center leading-10 ${currentPath === '/grievance' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Grievance Policy</a>
                                 <a href="attendance" className={`block w-full font-medium text-lg text-center leading-10 ${currentPath === '/attendance' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Attendance Policy</a>
                                 <a href="portal" className={`block w-full font-medium text-lg text-center leading-10 ${currentPath === '/portal' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Program Portal</a>
-                                <a href="videos" className={`block w-full font-medium text-lg text-center leading-10 ${currentPath === '/videos' ? 'text-[#0c3c60]' : 'text-[#9E9E9E]'}`}>Videos</a>
                             </div>
                         </div>  
                         </div>

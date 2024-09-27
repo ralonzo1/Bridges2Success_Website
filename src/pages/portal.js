@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import RecaptchaComponent from '../Components/RecaptchaComponent';
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 export default function Portal() {
   const [password, setPassword] = useState('');
@@ -98,7 +100,8 @@ export default function Portal() {
     return (
     
       <div className='h-screen bg-[#daedff]  m-auto fixed top-0 w-full left-0'>
-        <div className='fixed top-1/3 left-1/2 -translate-x-1/2'>
+          <Header />
+          <div className='fixed top-1/3 left-1/2 -translate-x-1/2'>
         <div className="text-5xl text-center text-[#0c3c60] font-medium">Guest Area</div>
         <form onSubmit={handleSubmit} className="p-4 text-center">
           <div className="text-[#0c3c60] text-base font-medium">Please enter the password below.</div>    
@@ -126,7 +129,8 @@ export default function Portal() {
 
     
     return (
-        
+        <>
+        <Header />
     <main className='bg-white p-4'>
         <h3 className="text-7xl text-center my-10 text-[#062134] font-light"  >Zoom Links &<br/>Worksheet Downloads</h3>
         <p className="pb-4 pt-4 text-center">You can only attend your assigned group unless you have received permission to join a different group. Participants not on the roster will not be accepted into the session without written approval</p>
@@ -189,6 +193,7 @@ Passcode: 409125</p>
 <p className='mt-20 text-base'>Your program will typically not start on Module one so be sure to download what you need for the program's current week**Open in Adobe Acrobat to be able to use a fillable version of your Worksheet**</p>
 
     </main>
-        
+            <Footer />
+        </>
     );
 }

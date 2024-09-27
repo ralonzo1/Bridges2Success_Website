@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import RecaptchaComponent from '../Components/RecaptchaComponent';
 import Modal from 'react-modal';
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 export default function Videos() {
     Modal.setAppElement('#root'); // Bind modal to root element for accessibility
@@ -169,6 +171,7 @@ export default function Videos() {
         return (
 
             <div className='h-screen bg-[#daedff]  m-auto fixed top-0 w-full left-0'>
+                <Header />
                 <div className='fixed top-1/3 left-1/2 -translate-x-1/2'>
                     <div className="text-5xl text-center text-[#0c3c60] font-medium">Guest Area</div>
                     <form onSubmit={handleSubmit} className="p-4 text-center">
@@ -196,15 +199,19 @@ export default function Videos() {
 
     if (isLoading) {
         return (
+            <>
+                <Header />
             <div className="flex justify-center items-center h-screen">
                 <div className="text-4xl font-medium">Loading Videos...</div>
             </div>
+            </>
         );
     }
 
     return (
-
-        <main className='bg-white p-4'>
+        <>
+            <Header />
+            <main className='bg-white p-4'>
             <h3 className="text-7xl text-center my-10 text-[#062134] font-light">Video Resources</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {videos.map((video) => (
@@ -259,6 +266,7 @@ export default function Videos() {
                 </div>
             </Modal>
         </main>
-
+            <Footer />
+        </>
     );
 }

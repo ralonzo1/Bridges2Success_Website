@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./layout/Layout";
+import LayoutGuest from "./layout/LayoutGuest";
 import Home from "./pages/Home";
 import './index.css';
 import Location from "./pages/Location";
@@ -17,17 +18,21 @@ function App() {
   return (
     <BrowserRouter>   
       <Routes>
+        <Route path="/videos" element={<LayoutGuest />}>
+          <Route path="/videos" element={<Videos />} />
+        </Route>
+        <Route path="/portal" element={<LayoutGuest />}>
+          <Route path="/portal" element={<Portal />} />
+        </Route>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home />} />   
+          <Route path="/" element={<Home />} />
           <Route path="/location" element={<Location />} />    
           <Route path="/fees" element={<Fees />} />    
           <Route path="/survivors" element={<Survivors />} />     
           <Route path="/contact" element={<Contact />} />  
           <Route path="/grievance" element={<Grievance />} />     
           <Route path="/attendance" element={<Attendance />} />     
-          <Route path="/registration" element={<Registration />} />    
-          <Route path="/portal" element={<Portal />} />     
-          <Route path="/videos" element={<Videos />} />
+          <Route path="/registration" element={<Registration />} />
         </Route>
     </Routes>  
     </BrowserRouter>
