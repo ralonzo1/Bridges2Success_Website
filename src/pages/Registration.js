@@ -489,7 +489,7 @@ export default function Registration() {
                     <RecaptchaComponent onVerify={setRecaptchaTokenV2} />
                     {errors.captcha && <span className="text-red-500">{errors.captcha}</span>}
                 </div>
-            {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Your registration has been submitted! Please check your email for further instructions. If you do not see them, be sure to check your spam folder as well Thanks!'</p>}
+            {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Your registration has been submitted! Please check your email for further instructions. If you do not see them, be sure to check your spam folder as well Thanks!</p>}
                 <div className="text-center my-10">
                     {isSubmitting && <div className="loader m-auto mb-4"></div>}
                     <button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto"
