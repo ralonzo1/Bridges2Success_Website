@@ -27,7 +27,7 @@ class UploadClientController extends Controller
         $data = [
             'FirstName' => $request->firstName,
             'LastName' => $request->lastName,
-            'DOB' => date($request->DOB),
+            'DOB' => \Carbon\Carbon::createFromFormat('Y-m-d', $request->DOB)->startOfDay()->format('Y-m-d H:i:s'),
             'Gender' => $request->gender,
             'Remarks' => $request->note,
             'VictimName' => $request->relationshipWithVictim,
