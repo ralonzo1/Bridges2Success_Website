@@ -26,7 +26,20 @@ class StoreUploadClient extends FormRequest
         return [
             'firstName' => 'required|string',
             'lastName' => 'required|string',
-            'DOB' => 'required|date',
+            'DOB' => [
+                'required',
+                'date',
+                'date_format:Y-m-d',
+                function ($attribute, $value, $fail) {
+                    // Ensure the date is within the SQL Server's acceptable date range
+                    $minDate = '1753-01-01';
+                    $maxDate = '9999-12-31';
+
+                    if ($value < $minDate || $value > $maxDate) {
+                        $fail("Please check the given date.");
+                    }
+                },
+            ],
             'gender' => 'required|string',
             'relationshipWithVictim' => 'required|string',
             'preferredPronouns' => 'sometimes|nullable|string',
