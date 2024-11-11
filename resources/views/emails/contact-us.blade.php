@@ -13,8 +13,7 @@
     </div>
     <div >
 
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Welcome to Bridges 2 Success,</p>
-      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Thank you for Contact Us. We will reach you soon.</p>
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Thank you for contacting us, we will reach out to you as soon as we are available.</p>
 
 
       <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" > Have a wonderful day!</p>
