@@ -37,7 +37,7 @@ class UploadClientController extends Controller
             'City' => $request->city,
             'State' => $request->state,
             'Zip' => $request->zipCode,
-            'PhoneHome' => $request->phone,
+            'PhoneCell' => $request->phone,
             'Email' => $request->email,
             'ReferredProgram' => $request->programsReferredTo ?? "",
             'ReferredBy' => $request->referredBy ?? "",
