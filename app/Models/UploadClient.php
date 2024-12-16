@@ -32,7 +32,7 @@ class UploadClient extends Model
         'State',
         'Zip',
         'Email',
-        'PhoneHome',
+        'PhoneCell',
         'Gender',
         'PictureFile',
         'ProgramID',
