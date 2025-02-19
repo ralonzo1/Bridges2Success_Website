@@ -4,6 +4,10 @@ import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../Components/cropImage'; // A utility function to get the cropped image
 import Modal from 'react-modal';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format, parseISO, isValid } from 'date-fns';
+import heic2any from 'heic2any'; // Import the library to convert HEIC/HEIF images
 
 const MAX_FILE_SIZE = 10485760; // 10 MB in bytes
 const MAX_FILE_SIZE_FOR_CROPPING = MAX_FILE_SIZE * 2; // Allow up to 20 MB for cropping
@@ -26,7 +30,8 @@ export default function Registration() {
     const [isAgreeChecked, setIsAgreeChecked] = useState(false);
     const [isPermissionChecked, setIsPermissionChecked] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false); // Track form submission state
-
+    const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission state
+    const [selectedDate, setSelectedDate] = useState(null); // Manage DOB date selection
     const [selectedFile, setSelectedFile] = useState(null);
     const [error, setError] = useState('');
     const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -53,7 +58,7 @@ export default function Registration() {
 
     const fileInputRef = useRef(null);
 
-    const onDrop = useCallback((acceptedFiles, fileRejections) => {
+    const onDrop = useCallback(async (acceptedFiles, fileRejections) => {
         if (fileRejections.length > 0) {
             const { errors } = fileRejections[0];
             const errorMessage = errors
@@ -75,14 +80,26 @@ export default function Registration() {
             setError('Invalid file type. Accepted types are .jpeg, .png');
             return;
         }
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            setSelectedFile(e.target.result);
-            setError('');
+        try {
+            let processedFile = file;
 
+            // Check if the file is in HEIC/HEIF format and convert if necessary
+            if (file.type === 'image/heic' || file.type === 'image/heif') {
+                const convertedBlob = await heic2any({ blob: file, toType: 'image/jpeg' });
+                processedFile = new File([convertedBlob], file.name.replace(/\.[^/.]+$/, ".jpeg"), { type: 'image/jpeg' });
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setSelectedFile(e.target.result);
+                setError('');
                 setModalIsOpen(true); // Open the modal for cropping if file size is large
-        };
-        reader.readAsDataURL(file);
+            };
+            reader.readAsDataURL(processedFile);
+        } catch (error) {
+            console.error('Error processing the file:', error);
+            setError('An error occurred while processing the image. Please try again.');
+        }
     }, []);
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -199,10 +216,32 @@ export default function Registration() {
             newErrors.lastName = 'Last Name is required';
             lastNameRef.current.scrollIntoView({behavior:'smooth'})
         }
-        if (!formData.get('DOB')) {
+
+
+
+        const minDate = new Date('1753-01-01');
+        const maxDate = new Date('9999-12-31');
+
+        if (!selectedDate) {
             newErrors.DOB = 'Date of Birth is required';
-            DOBRef.current.scrollIntoView({behavior:'smooth'})
+            if (DOBRef.current) {
+                DOBRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else if (!isValid(selectedDate)) {
+            // Check if the selected date is valid
+            newErrors.DOB = 'Please enter a valid date.';
+            DOBRef.current.scrollIntoView({ behavior: 'smooth' });
+        } else if (selectedDate < minDate || selectedDate > maxDate) {
+            // Check if the date is within SQL Server's range
+            newErrors.DOB = `Invalid Date of Birth`;
+            DOBRef.current.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Format date for backend if valid
+            const formattedDOB = format(selectedDate, 'yyyy-MM-dd');
+            formData.set('DOB', formattedDOB); // Store formatted date in FormData
         }
+
+
         if (!formData.get('gender')) {
             newErrors.gender = 'Gender is required';
             genderRef.current.scrollIntoView({behavior:'smooth'})
@@ -316,8 +355,20 @@ export default function Registration() {
                 </div>
                 <div className="flex flex-wrap mb-4">
                     <div className="w-full md:w-1/2 pr-2">
-                        <label>DOB*</label>
-                        <input ref={DOBRef} name="DOB" type="date" className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]" placeholder="Date of Birth"/>
+                        <label ref={DOBRef}>DOB*</label>
+                        <br/>
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={(date) => setSelectedDate(date)}
+                            dateFormat="MM/dd/yyyy" // U.S. format
+                            placeholderText="MM/DD/YYYY"
+                            showYearDropdown // Enable year dropdown
+                            showMonthDropdown // Enable month dropdown
+                            dropdownMode="select" // Use dropdowns for month and year
+                            scrollableYearDropdown // Make year dropdown scrollable
+                            yearDropdownItemNumber={100} // Show 100 years in dropdown
+                            className="block w-full bg-[#DAEDFF] border-2 p-1 border-black mt-2 focus-visible:outline-[#FF4040]"
+                        />
                         {errors.DOB && <span className="text-red-500">{errors.DOB}</span>}
                     </div>
                     <div className="w-full md:w-1/2 pr-2">
@@ -492,8 +543,8 @@ export default function Registration() {
             {showThankYou && <p className='text-lg font-semibold mt-4 text-center text-green-600'>Your registration has been submitted! Please check your email for further instructions. If you do not see them, be sure to check your spam folder as well Thanks!</p>}
                 <div className="text-center my-10">
                     {isSubmitting && <div className="loader m-auto mb-4"></div>}
-                    <button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto"
-                            disabled={isSubmitting}>Submit</button>
+                    {!showThankYou && <button type="submit" className="bg-[#373B4D] text-xl text-white py-3 px-8 text-center m-auto"
+                            disabled={isSubmitting}>Submit</button> }
                 </div>
             </form>
             <Modal

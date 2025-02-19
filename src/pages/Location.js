@@ -23,16 +23,16 @@ export default function Location() {
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6339.970463507384!2d-122.99486434994948!3d44.940907249479274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54bffedc6dafefbb%3A0x9a9dabdeb09c3043!2s740%20Hawthorne%20Ave%20NE%2C%20Salem%2C%20OR%2097301%2C%20USA!5e0!3m2!1sen!2sin!4v1712568358415!5m2!1sen!2sin"  width="100%" height="300"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
-      <div className='flex  justify-center  items-center my-10'>
-        <div className="w-2/5">
-            <h3 className="text-2xl mb-6">Woodburn Office</h3>
-            <p className="text-base my-4">1060 Mt Hood Ave <br/>Woodburn, OR 97071</p>
-            <p className="text-sm">(located inside the Woodburn Police Department)</p>
-        </div>
-        <div className="w-3/5">        
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14180.570719574927!2d-122.85321471221151!3d45.151019371465786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54955c32cdbd219d%3A0x1a20369441a1d367!2s1060%20Mt%20Hood%20Ave%2C%20Woodburn%2C%20OR%2097071%2C%20USA!5e0!3m2!1sen!2sin!4v1712568428507!5m2!1sen!2sin" width="100%" height="300"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
+      {/*<div className='flex  justify-center  items-center my-10'>*/}
+      {/*  <div className="w-2/5">*/}
+      {/*      <h3 className="text-2xl mb-6">Woodburn Office</h3>*/}
+      {/*      <p className="text-base my-4">1060 Mt Hood Ave <br/>Woodburn, OR 97071</p>*/}
+      {/*      <p className="text-sm">(located inside the Woodburn Police Department)</p>*/}
+      {/*  </div>*/}
+      {/*  <div className="w-3/5">        */}
+      {/*  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14180.570719574927!2d-122.85321471221151!3d45.151019371465786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54955c32cdbd219d%3A0x1a20369441a1d367!2s1060%20Mt%20Hood%20Ave%2C%20Woodburn%2C%20OR%2097071%2C%20USA!5e0!3m2!1sen!2sin!4v1712568428507!5m2!1sen!2sin" width="100%" height="300"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className='flex  justify-center  items-center my-10'>
         <div className="w-2/5">
             <h3 className="text-2xl mb-6">Clackamas Office</h3>
@@ -77,16 +77,16 @@ export default function Location() {
         </div>
       </div>
 
-      <div className='flex  justify-center  items-center my-10'>
-        <div className="w-2/5">
-            <h3 className="text-2xl mb-6">Scappoose Office</h3>
-            <p className="text-base my-4">33611 E. Columbia Ave, Suite B <br/>Scappoose, OR 97056</p>
-            
-        </div>
-        <div className="w-3/5">        
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6249.094231826709!2d-122.8790660149887!3d45.758061211297246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549454f649ec8577%3A0xdb4d1fb522f69bd2!2s33611%20E%20Columbia%20Ave%20b%2C%20Scappoose%2C%20OR%2097056%2C%20USA!5e0!3m2!1sen!2sin!4v1712568910999!5m2!1sen!2sin" width="100%" height="300"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
+      {/*<div className='flex  justify-center  items-center my-10'>*/}
+      {/*  <div className="w-2/5">*/}
+      {/*      <h3 className="text-2xl mb-6">Scappoose Office</h3>*/}
+      {/*      <p className="text-base my-4">33611 E. Columbia Ave, Suite B <br/>Scappoose, OR 97056</p>*/}
+      {/*      */}
+      {/*  </div>*/}
+      {/*  <div className="w-3/5">        */}
+      {/*  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6249.094231826709!2d-122.8790660149887!3d45.758061211297246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549454f649ec8577%3A0xdb4d1fb522f69bd2!2s33611%20E%20Columbia%20Ave%20b%2C%20Scappoose%2C%20OR%2097056%2C%20USA!5e0!3m2!1sen!2sin!4v1712568910999!5m2!1sen!2sin" width="100%" height="300"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
      
     </main>
