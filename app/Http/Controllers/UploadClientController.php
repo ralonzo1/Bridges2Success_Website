@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUploadClient;
 use App\Mail\RegistrationEmail;
+use App\Mail\RegistrationFromSettingsEmail;
 use Illuminate\Http\Request;
 use App\Models\UploadClient;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +16,11 @@ class UploadClientController extends Controller
     {
         $data = $this->generateDataToStore($request);
         UploadClient::create($data);
-        Mail::to($data['Email'])->send(new RegistrationEmail($data['Email'], $data['FirstName'] . " " . $data['LastName']));
+
+        $websiteSettings = \App\Models\WebsiteSettings::first();
+
+        Mail::to($data['Email'])->send(new \App\Mail\RegistrationFromSettingsEmail($data['Email'], $data['FirstName'] . " " . $data['LastName'], $websiteSettings['ClientEmail']));
+
         return response()->json([
             'status' => true,
             "message" => "Data stored successfully"
