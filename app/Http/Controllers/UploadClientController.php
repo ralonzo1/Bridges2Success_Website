@@ -18,8 +18,10 @@ class UploadClientController extends Controller
         UploadClient::create($data);
 
         $websiteSettings = \App\Models\WebsiteSettings::first();
+        $mailContent = str_replace("[LastName]", $data['LastName'], str_replace("[FirstName]", $data['FirstName'], $websiteSettings['ClientEmail']));
+        $mailSubject = $websiteSettings['SubjectLine'];
 
-        Mail::to($data['Email'])->send(new \App\Mail\RegistrationFromSettingsEmail($data['Email'], $data['FirstName'] . " " . $data['LastName'], $websiteSettings['ClientEmail']));
+        Mail::to($data['Email'])->send(new \App\Mail\RegistrationFromSettingsEmail($data['Email'], $mailSubject, $mailContent));
 
         return response()->json([
             'status' => true,
@@ -52,7 +54,7 @@ class UploadClientController extends Controller
             'chkAgree' => $request->chkAgree ? 1 : 0,
             'chkPermission' => $request->chkPermission ? 1 : 0,
             'AllowEmail' => 1,
-            'FullName' => $request->lastName . ', '. $request->firstName,
+            'FullName' => $request->lastName . ', ' . $request->firstName,
         ];
 
         // Check file present in request

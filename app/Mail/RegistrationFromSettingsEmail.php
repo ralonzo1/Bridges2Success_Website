@@ -10,16 +10,16 @@ class RegistrationFromSettingsEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public string $name = '';
     public string $email = '';
+    public string $subjectText = '';
     public string $htmlContent = '';
     /**
      * Create a new message instance.
      */
-    public function __construct(string $email, string $name, string $htmlContent)
+    public function __construct(string $email, string $subjectText = "Registration Email", string $htmlContent)
     {
-        $this->name = $name;
         $this->email = $email;
+        $this->subjectText = $subjectText;
         $this->htmlContent = $htmlContent;
     }
 
@@ -30,7 +30,7 @@ class RegistrationFromSettingsEmail extends Mailable
     public function build()
     {
         return $this->from(config('mail.from.address'), config('mail.from.name'))
-            ->subject('Registration Email')
+            ->subject($this->subjectText)
             ->html($this->htmlContent);
     }
 }

@@ -11,7 +11,7 @@ class WebsiteSettings extends Model
 
     protected $table = 'tblWebsiteSettings';
 
-    protected $visible = ['ClientEmail'];
+    protected $visible = ['ClientEmail', 'SubjectLine'];
 
     // remove all columns except the wanted ones
     public function setRawAttributes(array $attributes, $sync = false)
