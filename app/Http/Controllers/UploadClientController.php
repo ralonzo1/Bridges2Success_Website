@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUploadClient;
 use App\Mail\RegistrationEmail;
+use App\Mail\RegistrationFromSettingsEmail;
 use Illuminate\Http\Request;
 use App\Models\UploadClient;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +16,13 @@ class UploadClientController extends Controller
     {
         $data = $this->generateDataToStore($request);
         UploadClient::create($data);
-        Mail::to($data['Email'])->send(new RegistrationEmail($data['Email'], $data['FirstName'] . " " . $data['LastName']));
+
+        $websiteSettings = \App\Models\WebsiteSettings::first();
+        $mailContent = str_replace("[LastName]", $data['LastName'], str_replace("[FirstName]", $data['FirstName'], $websiteSettings['ClientEmail']));
+        $mailSubject = $websiteSettings['SubjectLine'];
+
+        Mail::to($data['Email'])->send(new \App\Mail\RegistrationFromSettingsEmail($data['Email'], $mailSubject, $mailContent));
+
         return response()->json([
             'status' => true,
             "message" => "Data stored successfully"
@@ -47,7 +54,7 @@ class UploadClientController extends Controller
             'chkAgree' => $request->chkAgree ? 1 : 0,
             'chkPermission' => $request->chkPermission ? 1 : 0,
             'AllowEmail' => 1,
-            'FullName' => $request->lastName . ', '. $request->firstName,
+            'FullName' => $request->lastName . ', ' . $request->firstName,
         ];
 
         // Check file present in request

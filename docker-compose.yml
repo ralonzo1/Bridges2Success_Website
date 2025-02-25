@@ -19,10 +19,11 @@ services:
       - DB_PASSWORD=Avdevs@123
       - DB_ENCRYPT=yes
       - DB_TRUST_SERVER_CERTIFICATE=true
-    network_mode: host
   sql-server:
     image: mcr.microsoft.com/mssql/server
     restart: always
+    ports:
+      - "1433:1433"
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Avdevs@123

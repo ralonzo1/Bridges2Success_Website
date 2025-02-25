@@ -1,5 +1,5 @@
 # Use the official PHP image
-FROM php:8.1-apache
+FROM --platform=linux/amd64 php:8.1-apache
 
 # Set the working directory in the container
 WORKDIR /var/www/html
@@ -43,4 +43,4 @@ RUN composer install
 EXPOSE 8000
 
 # Start the Laravel web server
-CMD ["php", "artisan", "serve", "--host=127.0.0.1", "--port=8000"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
