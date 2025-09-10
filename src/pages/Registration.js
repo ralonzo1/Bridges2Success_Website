@@ -8,6 +8,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format, parseISO, isValid } from 'date-fns';
 import heic2any from 'heic2any'; // Import the library to convert HEIC/HEIF images
+import { heicTo } from "heic-to"
+
 
 const MAX_FILE_SIZE = 10485760; // 10 MB in bytes
 const MAX_FILE_SIZE_FOR_CROPPING = MAX_FILE_SIZE * 2; // Allow up to 20 MB for cropping
@@ -85,7 +87,13 @@ export default function Registration() {
 
             // Check if the file is in HEIC/HEIF format and convert if necessary
             if (file.type === 'image/heic' || file.type === 'image/heif') {
-                const convertedBlob = await heic2any({ blob: file, toType: 'image/jpeg' });
+                const convertedBlob = await heicTo({
+                    blob: file,
+                    type: "image/jpeg",
+                    quality: 0.5
+                })
+
+                // const convertedBlob = await heic2any({ blob: file, toType: 'image/jpeg' });
                 processedFile = new File([convertedBlob], file.name.replace(/\.[^/.]+$/, ".jpeg"), { type: 'image/jpeg' });
             }
 
@@ -470,12 +478,13 @@ export default function Registration() {
                             <option value="Wilsonville">Wilsonville</option>
                             <option value="Clackamas">Clackamas</option>
                             <option value="Portland">Portland</option>
-                            <option value="Scappoose">Scappoose</option>
+                            {/*<option value="Scappoose">Scappoose</option>*/}
                             <option value="Gresham">Gresham</option>
                             <option value="Bend">Bend</option>
                             <option value="Beaverton">Beaverton</option>
                             <option value="Hillsboro">Hillsboro</option>
                             <option value="Tillamook">Tillamook</option>
+                            <option value="Other">Other</option>
                         </select>
                         {errors.location && <span className="text-red-500">{errors.location}</span>}
                     </div>
