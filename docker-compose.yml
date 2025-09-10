@@ -12,7 +12,7 @@ services:
       - sql-server
     environment:
       - DB_CONNECTION=sqlsrv
-      - DB_HOST=192.168.29.84
+      - DB_HOST=sql-server
       - DB_PORT=1433
       - DB_DATABASE=clientprogressonline_dev
       - DB_USERNAME=sa
