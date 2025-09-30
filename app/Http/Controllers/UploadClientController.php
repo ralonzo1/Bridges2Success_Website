@@ -57,7 +57,7 @@ class UploadClientController extends Controller
                     </div>
 
                     <h2 style="color:#b91c1c; font-size:18px; font-weight:700; margin-bottom:10px;">
-                        An error occurred while processing a client upload
+                        Client registration failed
                     </h2>
 
                     <div style="background:#fef2f2; border:1px solid #fecaca; padding:12px; border-radius:6px; margin-bottom:20px;">
