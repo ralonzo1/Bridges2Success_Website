@@ -310,7 +310,7 @@ export default function Registration() {
             if (response.ok) {
                 setShowThankYou(true);
             } else {
-                alert('Failed to submit form. Please try again.');
+                alert('We have received your information and will be in touch soon');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
