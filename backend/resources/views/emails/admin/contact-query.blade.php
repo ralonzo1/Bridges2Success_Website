@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proof of Enrollment and Next Steps</title>
+</head>
+<body style="background: rgb(239, 232, 216); padding: 30px 0;">
+  <div style="margin:  auto; max-width: 600px; background: #ffffff; padding: 20px 80px;">
+    <div style="text-align: center; ">
+      <img src="{{ asset('logo.jpg') }}" style="max-width: 150px;margin-bottom: 10px;">
+
+    </div>
+    <div >
+
+
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >New customer contact:</p>
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Customer Email:&nbsp; <a href="mailto:{{ $email }}">{{ $email }}</a> </p>
+      <p style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px; margin-top: 10px; margin-bottom: 25px;" >Message: {{ $messageFromCustomer }}</p>
+
+      <p  style="font-family: arial,sans-serif; line-height: 24px; font-size: 16px;margin-top: 10px; margin-bottom: 25px;" > -The Bridges 2 Success Team</p>
+
+    </div>
+</body>
+</html>
