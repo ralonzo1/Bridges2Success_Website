@@ -1,0 +1,64 @@
+{
+  "importHead": "4486a93d496f195bcb3dceba7decdf2205cfd68b",
+  "method": "Git prefix read-tree plus two-parent commit-tree commits; no squash or rewrite",
+  "createdAt": "2026-10-05T23:34:56.3782562Z",
+  "scope": "Local snapshot; no remote or production access",
+  "sources": [
+    {
+      "bundleSha256": "9687bd6eab5bcc8dba3bcc5ba78fce9981f99f82f03fdd77ef2bd4c82fc32c75",
+      "source": "D:\\WebwareSolutions Systems\\bridges2success.com\\cpo-registration-frontend",
+      "origin": "https://github.com/ralonzo1/cpo-registration-frontend.git",
+      "refs": [
+        {
+          "oid": "c9f4b47f2bf56a9d74725a42c9cbdbe4a6ef3f7e",
+          "ref": "refs/heads/master"
+        },
+        {
+          "oid": "c9f4b47f2bf56a9d74725a42c9cbdbe4a6ef3f7e",
+          "ref": "refs/remotes/origin/HEAD"
+        },
+        {
+          "oid": "066f2a82f1a248b3681a6ccf02a98ca642717f33",
+          "ref": "refs/remotes/origin/develop"
+        },
+        {
+          "oid": "c9f4b47f2bf56a9d74725a42c9cbdbe4a6ef3f7e",
+          "ref": "refs/remotes/origin/master"
+        }
+      ],
+      "head": "c9f4b47f2bf56a9d74725a42c9cbdbe4a6ef3f7e",
+      "bundle": "C:\\Users\\Work\\Documents\\Codex\\2026-10-05\\trying-to-find-my-chat-now-2\\outputs\\repository-backups\\frontend.bundle",
+      "tree": "b053c201c8028ea305ff779a2dfc88b9ae675d07",
+      "prefix": "frontend",
+      "reachableCommits": 33
+    },
+    {
+      "bundleSha256": "973e495b1fcd01fae6b9d2c03fd0e6280d35a5899c531be849e009cfe1234c7a",
+      "source": "D:\\WebwareSolutions Systems\\bridges2success.com\\cpo-registration-backend",
+      "origin": "https://github.com/ralonzo1/cpo-registration-backend.git",
+      "refs": [
+        {
+          "oid": "8feccfb0874bfb13b9a6c0fdab6f79f94d98189e",
+          "ref": "refs/heads/master"
+        },
+        {
+          "oid": "8feccfb0874bfb13b9a6c0fdab6f79f94d98189e",
+          "ref": "refs/remotes/origin/HEAD"
+        },
+        {
+          "oid": "d5bef48cae427a69d2ef1739023bd7e10d830f21",
+          "ref": "refs/remotes/origin/develop"
+        },
+        {
+          "oid": "8feccfb0874bfb13b9a6c0fdab6f79f94d98189e",
+          "ref": "refs/remotes/origin/master"
+        }
+      ],
+      "head": "8feccfb0874bfb13b9a6c0fdab6f79f94d98189e",
+      "bundle": "C:\\Users\\Work\\Documents\\Codex\\2026-10-05\\trying-to-find-my-chat-now-2\\outputs\\repository-backups\\backend.bundle",
+      "tree": "c4c8ba87f962b0061c8e98138a45d70962e81750",
+      "prefix": "backend",
+      "reachableCommits": 35
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "recordedAt": "2026-10-05T23:43:50.9334479Z",
+  "frontendTests": {
+    "cases": [
+      {
+        "name": "registration missing required values prevents an API request",
+        "status": "passed"
+      },
+      {
+        "name": "registration posts mapped form fields and displays successful HTTP receipt",
+        "status": "passed"
+      },
+      {
+        "name": "existing registration HTTP 403 receipt-like alert is preserved and documented",
+        "status": "passed"
+      },
+      {
+        "name": "existing registration HTTP 422 receipt-like alert is preserved and documented",
+        "status": "passed"
+      },
+      {
+        "name": "existing registration HTTP 429 receipt-like alert is preserved and documented",
+        "status": "passed"
+      },
+      {
+        "name": "existing registration HTTP 500 receipt-like alert is preserved and documented",
+        "status": "passed"
+      },
+      {
+        "name": "registration network failure displays retry message",
+        "status": "passed"
+      },
+      {
+        "name": "contact submits only to mocked API and displays acknowledgment",
+        "status": "passed"
+      },
+      {
+        "name": "portal password result changes display state without server session",
+        "status": "passed"
+      },
+      {
+        "name": "existing portal browser-only gate can be restored without API authorization",
+        "status": "passed"
+      },
+      {
+        "name": "existing video browser-only gate loads mocked Vimeo metadata without API authorization",
+        "status": "passed"
+      },
+      {
+        "name": "route / renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /location renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /fees renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /survivors renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /contact renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /grievance renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /attendance renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /registration renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /portal renders expected page content",
+        "status": "passed"
+      },
+      {
+        "name": "route /videos renders expected page content",
+        "status": "passed"
+      }
+    ],
+    "baselinePassed": 21,
+    "consolidatedFailed": 0,
+    "baselineFailed": 0,
+    "consolidatedPassed": 21
+  },
+  "buildSourceComparison": {
+    "baselineSources": 438,
+    "consolidatedSources": 438,
+    "differentSources": [
+      "../webpack/runtime/get javascript chunk filename"
+    ]
+  },
+  "phpSyntax": {
+    "failed": 0,
+    "checked": 63
+  },
+  "inheritedTestStatus": "Fails identically in original archive and consolidated source: Worker is not defined",
+  "realBrowserStatus": "Blocked by OS process/IPC access denial",
+  "backendIntegrationStatus": "Not run: deployed dependency lock and isolated CPO environment absent",
+  "productionChanged": false
+}
